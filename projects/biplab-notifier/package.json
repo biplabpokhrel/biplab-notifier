@@ -1,6 +1,13 @@
 {
   "name": "biplab-notifier",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "This is a notification npm package",
+  "keywords" :["Angular","Notifier", "Notification"],
+  "license" : "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/biplabpokhrel/biplab-notifier"
+  },
   "peerDependencies": {
     "@angular/common": "^7.1.0",
     "@angular/core": "^7.1.0"
