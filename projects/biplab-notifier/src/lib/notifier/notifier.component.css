@@ -1,0 +1,38 @@
+
+@keyframes show {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+    1% {
+        display: block;
+    }
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@keyframes hide {
+    0% {
+        display: block;
+        opacity: 1;
+    }
+    99% {
+        display: block;
+    }
+    100% {
+        display: none;
+        opacity: 0;
+    }
+}
+
+.message-show {
+    animation: show 1000ms linear;
+    animation-fill-mode: both;
+}
+
+.message-hide {
+    animation: hide 1000ms linear;
+    animation-fill-mode: both;
+}

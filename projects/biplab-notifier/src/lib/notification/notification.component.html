@@ -1,0 +1,7 @@
+<ng-template [ngIf]="layout">
+  <div class="notification" [ngClass]=type >
+      <span *ngIf="layout.closeButton.status === 'show'" class="closebtn" (click)="close.emit(true)">&times;</span> 
+      <strong>{{ header|titlecase }}</strong>
+      <span *ngIf="notice">  {{ notice.message }}  </span> 
+  </div>
+</ng-template>

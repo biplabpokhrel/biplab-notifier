@@ -17,6 +17,16 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "biplab-notifier": [
+        "dist/biplab-notifier",
+        "dist/biplab-notifier"
+      ],
+      "biplab-notifier/*": [
+        "dist/biplab-notifier/*",
+        "dist/biplab-notifier/*"
+      ]
+    }
   }
 }

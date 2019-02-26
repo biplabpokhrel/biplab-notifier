@@ -1,0 +1,14 @@
+<ng-template [ngIf]="layout">
+  <div *ngIf="layout.title.status === 'show'" class="notification" [ngClass]=type >
+      <span *ngIf="layout.closeButton.status === 'show'" class="closebtn" (click)="close.emit(true)">&times;</span> 
+      <strong>{{ layout.head ? layout.head : type | titlecase }}</strong>
+  </div>
+  <div class="notification-body" *ngIf="layout.body.status === 'show'">
+      <div *ngFor="let notice of notices"  class="notification-body-row">
+          {{ notice.message }}
+      </div>
+      <div class="notification-btn-row" *ngIf="layout.dismissButton.status === 'show'">
+          <a href="#" class="notificationbtn" (click)="close.emit(true)" [ngClass]=type >Ok</a>
+      </div>
+  </div>
+</ng-template>

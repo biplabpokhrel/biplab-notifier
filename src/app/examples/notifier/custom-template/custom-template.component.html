@@ -1,0 +1,8 @@
+This is custom template
+<ng-template #custom let-message="data" >
+  <div style="background: red; color: white; padding: 15px;">
+    {{ message.msg }}
+  </div>
+</ng-template>
+<biplab-notifier [customTemplate]="custom" [(notification)]="notification">
+</biplab-notifier>

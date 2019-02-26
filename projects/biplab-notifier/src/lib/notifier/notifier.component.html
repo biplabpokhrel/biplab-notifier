@@ -1,0 +1,23 @@
+<div *ngIf="notifier && status">
+    <ng-template [ngIf]="!customTemplate && layout === 'single'">
+      <biplab-notification 
+        [(layout)]="notifier.notice.layout"
+        [notice]="notice"
+        [(type)]="notifier.notice.type"
+        (close)="close()"
+        >
+      </biplab-notification>
+    </ng-template>
+    <ng-template [ngIf]="!customTemplate && layout === 'multi'">
+      <biplab-notifications
+        [(layout)]="notifier.notice.layout"
+        [notices]="notices"
+        [(type)]="notifier.notice.type"
+        (close)="close()"
+        >
+      </biplab-notifications>
+    </ng-template>
+    <ng-template [ngIf]="customTemplate">
+        <ng-container *ngTemplateOutlet="customTemplate;context:{ data: data }"></ng-container>
+    </ng-template>  
+</div>
