@@ -9,6 +9,8 @@ biplab-notifier
 |-----------|-------------|
 |  @Input() customTemplate: TemplateRef<any> | Design your own template and pass that to use |
 |  @Input() notification: Notification | You must have to pass as instance of `Notification` |
+|  @Input() notifierTemplates: NotifierTemplate | You can pass template to add icon for notification type, change ok button with something else, or add template in body or header |
+
 
 `Notification` is a class, which contain all configuration need to execute biplab-notifier
 
@@ -20,6 +22,8 @@ biplab-notifier
 |  message: string | You will use if you want  to pass single value |
 |  message: string[] | You will use if you want to pass multiple values |
 |  layoutType: 'single' or 'multi' | Default is single, meaning you can only set data to `message` attribute, Always remember to set `layoutType` as 'multi' if you want to set list of values in notices attribute otherwise it will generate error |
+| @Output() afterClose | Will notify you whenever notifaction closed |
+| @Output() afterOpen | Will notify you whenever notifaction opened |
 
 
 ### Notification methods

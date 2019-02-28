@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, Output, EventEmitter } from '@angular/core';
 import { Notifier } from '../action/notifier';
-import { MultiNotifier, SingleNotifier } from '../layout/notifier';
-import { Message } from '../message/notifer';
+import { MultiNotifier, SingleNotifier, NotificationHint } from '../layout/notifier';
 import { Notification } from '../notification';
+import { NotifierTemplate } from '../template/notifier';
 
 @Component({
   selector: 'biplab-notifier',
@@ -10,25 +10,30 @@ import { Notification } from '../notification';
   styleUrls: ['./notifier.component.css']
 })
 export class NotifierComponent implements OnInit {
-
+  @Input() notifierTemplates?: NotifierTemplate;
   @Input() customTemplate: TemplateRef<any>;
   @Input() notification: Notification;
   notifier: Notifier;
-
+  notificationHint: NotificationHint = {
+    data: undefined,
+    layout: undefined,
+    type: undefined,
+    template: undefined
+  };
   constructor() { }
 
   ngOnInit() {
     if (this.notification) {
       this.notifier = new Notifier(this.notification);
+      this.notificationHint.layout = this.notifier.notice.layout;
+      this.notificationHint.data = this.notifier.notice.data;
+      this.notificationHint.type = this.notifier.type;
+      this.notificationHint.template = this.notifierTemplates ;
     }
   }
 
   close() {
     this.notifier.deactivate();
-  }
-
-  icon(messageType: string): string {
-    return `../../../assets/icons/${messageType}.svg`;
   }
 
   get status(): boolean {
@@ -47,19 +52,6 @@ export class NotifierComponent implements OnInit {
     return null;
   }
 
-  get notice(): Message | null {
-    if ( this.layout === 'single' ) {
-      return <Message>this.notifier.notice.data;
-    }
-    return null;
-  }
-
-  get notices(): Message[] | null {
-    if ( this.layout === 'multi' ) {
-      return <Message[]>this.notifier.notice.data;
-    }
-    return null;
-  }
 
   get layout(): 'single'|'multi'| null {
     if ( this.notifier.notice.layout instanceof MultiNotifier) {
@@ -69,20 +61,6 @@ export class NotifierComponent implements OnInit {
     } else {
       return null;
     }
-  }
-
-  get data(): { messageType: string, msg: string | string[], dataType: string} {
-    if (Array.isArray(this.notifier.notice.data)) {
-      return {
-        messageType: this.notifier.type || 'Not set',
-        msg: this.notifier.notice.data ? this.notifier.notice.data.map(({ message }) => message) : [],
-        dataType: 'list' };
-    }
-    return {
-      messageType: this.notifier.type || 'Not set',
-      msg: this.notifier.notice.data ? this.notifier.notice.data['message'] : '',
-      dataType: 'single'
-    };
   }
 
 }

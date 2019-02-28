@@ -1,0 +1,23 @@
+<p>
+  icon-template
+</p>
+<ng-template #icon>
+  <span style="background: red; padding: 5px;">apple</span>
+</ng-template>
+<ng-template #dismiss>
+    <span style="background: red; padding: 5px;">Cancel</span>
+</ng-template>
+<ng-template #body>
+    <span style="background: rgb(175, 167, 167); padding: 15px;">This is body</span>
+</ng-template>
+<ng-template #head>
+    <span style="background: rgb(175, 167, 167); padding: 15px;">This is head</span>
+</ng-template>
+<biplab-notifier
+  [(notification)]="notification">
+</biplab-notifier>
+<hr>
+<biplab-notifier
+  [notifierTemplates]="{'typeIcon': icon, 'body': body, 'button': dismiss, 'head': head}"
+  [(notification)]="notificationMulti">
+</biplab-notifier>

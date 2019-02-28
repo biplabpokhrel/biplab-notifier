@@ -5,12 +5,14 @@ import { NotifierModule } from "biplab-notifier";
 import { CustomTemplateComponent } from './examples/notifier/custom-template/custom-template.component';
 import { AutoHideMessageComponent } from './examples/notifier/auto-hide-message/auto-hide-message.component';
 import { MultipleMessageComponent } from './examples/notifier/multiple-message/multiple-message.component';
+import { IconTemplateComponent } from './examples/notifier/icon-template/icon-template.component';
 @NgModule({
   declarations: [
     AppComponent,
     CustomTemplateComponent,
     AutoHideMessageComponent,
-    MultipleMessageComponent
+    MultipleMessageComponent,
+    IconTemplateComponent
   ],
   imports: [
     BrowserModule,

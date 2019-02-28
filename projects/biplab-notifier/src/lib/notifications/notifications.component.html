@@ -1,14 +1,21 @@
-<ng-template [ngIf]="layout">
-  <div *ngIf="layout.title.status === 'show'" class="notification" [ngClass]=type >
-      <span *ngIf="layout.closeButton.status === 'show'" class="closebtn" (click)="close.emit(true)">&times;</span> 
-      <strong>{{ layout.head ? layout.head : type | titlecase }}</strong>
+<ng-template [ngIf]="layoutHint">
+  <div class="notification" [ngClass]=layoutHint.type >
+      <span *ngIf="layoutHint.layout.closeButton.status === 'show'" class="closebtn" (click)="close.emit(true)">&times;</span> 
+      <ng-container *ngIf="layoutHint.template?.typeIcon then layoutHint.template?.typeIcon else empty"></ng-container>
+      <ng-template #empty></ng-template>
+      <strong *ngIf="layoutHint.layout.title.status === 'show'">{{ layoutHint.layout['head'] ? layoutHint.layout['head'] :  layoutHint.type | titlecase }}</strong>
+      <ng-container *ngIf="layoutHint.template?.head then layoutHint.template?.head else empty"></ng-container>
   </div>
-  <div class="notification-body" *ngIf="layout.body.status === 'show'">
-      <div *ngFor="let notice of notices"  class="notification-body-row">
+  <div class="notification-body" *ngIf="layoutHint.layout['body']['status'] === 'show'">
+      <ng-container *ngIf="layoutHint.template?.body then layoutHint.template?.body else defaultButton"></ng-container>
+      <div *ngFor="let notice of data"  class="notification-body-row">
           {{ notice.message }}
       </div>
-      <div class="notification-btn-row" *ngIf="layout.dismissButton.status === 'show'">
-          <a href="#" class="notificationbtn" (click)="close.emit(true)" [ngClass]=type >Ok</a>
-      </div>
+      <ng-template #defaultButton>
+        <div class="notification-btn-row" *ngIf="layoutHint.layout['dismissButton']['status'] === 'show'">
+          <a href="#" class="notificationbtn" (click)="close.emit(true)" [ngClass]=layoutHint.type >Ok</a>
+        </div>
+      </ng-template>
+      <ng-container *ngIf="layoutHint.template?.button then layoutHint.template?.button else defaultButton"></ng-container>
   </div>
 </ng-template>

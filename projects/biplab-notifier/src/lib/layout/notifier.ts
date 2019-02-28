@@ -1,3 +1,6 @@
+import { Message } from '../message/notifer';
+import { NotifierTemplate } from '../template/notifier';
+
 interface Visibility {
     status: 'show' | 'hide';
 }
@@ -31,4 +34,9 @@ export class MultiNotifier extends SingleNotifier {
     }
 }
 
-
+export interface NotificationHint {
+    template?: NotifierTemplate;
+    layout: SingleNotifier | MultiNotifier;
+    data: Message | Message[];
+    type: string;
+}

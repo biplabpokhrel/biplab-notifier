@@ -9,6 +9,7 @@ export class AppComponent {
   notification = new Notification();
   title = 'notifications';
   constructor() {
+    this.notification.title = 'hide';
     this.notification.type = 'success';
     this.notification.message = 'You will see this message with success title';
     this.notification.show();
