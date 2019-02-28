@@ -17,15 +17,18 @@ export class Notification extends NotifcationLayout  {
     status: 'activate' | 'deactivate';
     data: Message | Message[];
 
-    constructor() {
+    constructor(layoutType?: 'single' | 'multi') {
         super();
         this.status = 'deactivate';
+        if (layoutType) {
+            this.layoutType = layoutType;
+        }
     }
 
     set message(msg: string) {
         if (this.layoutType === 'multi') {
             console.error(`
-            Warning: incorrent layoutType or message/s set,
+            Warning: incorrent layoutType i.e. ${ this.layoutType } or message/s set,
             value will be ignore help: either set layoutType='multi'
             and messages=['your message1', 'your message1']
             or set layoutType='single' and message='Yourmessage'`,
@@ -40,7 +43,7 @@ export class Notification extends NotifcationLayout  {
             this.data = msgs.map((msg: string) => new Message(msg));
         } else {
             console.error(`
-            Warning: incorrent layoutType or message/s set,
+            Warning: incorrent layoutType set i.e. ${ this.layoutType } or message/s set,
             value will be ignore help: either set layoutType='multi'
             and messages=['your message1', 'your message1']
             or set layoutType='single' and message='Yourmessage'`,

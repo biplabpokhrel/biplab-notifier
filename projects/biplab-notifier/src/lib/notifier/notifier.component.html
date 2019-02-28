@@ -1,14 +1,14 @@
 <div *ngIf="notifier && status">
     <ng-template [ngIf]="!customTemplate && layout === 'single'">
       <biplab-notification 
-        [(layoutHint)]="notificationHint"
+        [layoutHint]="notificationHint"
         (close)="close()"
         >
       </biplab-notification>
     </ng-template>
     <ng-template [ngIf]="!customTemplate && layout === 'multi'">
       <biplab-notifications
-        [(layoutHint)]="notificationHint"
+        [layoutHint]="notificationHint"
         (close)="close()"
         >
       </biplab-notifications>

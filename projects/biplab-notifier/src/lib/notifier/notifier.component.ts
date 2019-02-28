@@ -14,21 +14,12 @@ export class NotifierComponent implements OnInit {
   @Input() customTemplate: TemplateRef<any>;
   @Input() notification: Notification;
   notifier: Notifier;
-  notificationHint: NotificationHint = {
-    data: undefined,
-    layout: undefined,
-    type: undefined,
-    template: undefined
-  };
+
   constructor() { }
 
   ngOnInit() {
     if (this.notification) {
       this.notifier = new Notifier(this.notification);
-      this.notificationHint.layout = this.notifier.notice.layout;
-      this.notificationHint.data = this.notifier.notice.data;
-      this.notificationHint.type = this.notifier.type;
-      this.notificationHint.template = this.notifierTemplates ;
     }
   }
 
@@ -61,6 +52,15 @@ export class NotifierComponent implements OnInit {
     } else {
       return null;
     }
+  }
+
+  get notificationHint(): NotificationHint {
+    return {
+      layout: this.notifier.notice.layout,
+      data: this.notifier.notice.data,
+      type: this.notifier.type,
+      template: this.notifierTemplates
+    };
   }
 
 }

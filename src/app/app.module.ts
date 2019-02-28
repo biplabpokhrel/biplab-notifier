@@ -6,13 +6,15 @@ import { CustomTemplateComponent } from './examples/notifier/custom-template/cus
 import { AutoHideMessageComponent } from './examples/notifier/auto-hide-message/auto-hide-message.component';
 import { MultipleMessageComponent } from './examples/notifier/multiple-message/multiple-message.component';
 import { IconTemplateComponent } from './examples/notifier/icon-template/icon-template.component';
+import { ShowOnClickComponent } from './examples/notifier/show-on-click/show-on-click.component';
 @NgModule({
   declarations: [
     AppComponent,
     CustomTemplateComponent,
     AutoHideMessageComponent,
     MultipleMessageComponent,
-    IconTemplateComponent
+    IconTemplateComponent,
+    ShowOnClickComponent
   ],
   imports: [
     BrowserModule,

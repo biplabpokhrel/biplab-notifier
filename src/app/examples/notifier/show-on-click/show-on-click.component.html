@@ -1,0 +1,19 @@
+This is show-on-click
+<biplab-notifier [(notification)]="notification">
+</biplab-notifier>
+<button (click)="clickToShowHelp()">Show help</button>
+<button (click)="clickToShowError()">Show Error</button>
+<button (click)="clickToShowWarn()">Show warn</button>
+<button (click)="clickToShowNote()">Show note</button>
+<button (click)="clickToShowSuccess()">Show success</button>
+
+<hr>
+
+<button (click)="clickToShowHelpMulti()">Show help Multi</button>
+<button (click)="clickToShowErrorMulti()">Show Error Multi</button>
+<button (click)="clickToShowWarnMulti()">Show warn Multi</button>
+<button (click)="clickToShowNoteMulti()">Show note Multi</button>
+<button (click)="clickToShowSuccessMulti()">Show success Multi</button>
+<biplab-notifier [(notification)]="notificationMulti"></biplab-notifier>
+
+<button (click)="clickToHide()">Hide</button>

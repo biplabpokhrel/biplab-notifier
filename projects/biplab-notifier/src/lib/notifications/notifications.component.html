@@ -1,13 +1,13 @@
+<ng-template #empty></ng-template>
 <ng-template [ngIf]="layoutHint">
   <div class="notification" [ngClass]=layoutHint.type >
       <span *ngIf="layoutHint.layout.closeButton.status === 'show'" class="closebtn" (click)="close.emit(true)">&times;</span> 
       <ng-container *ngIf="layoutHint.template?.typeIcon then layoutHint.template?.typeIcon else empty"></ng-container>
-      <ng-template #empty></ng-template>
       <strong *ngIf="layoutHint.layout.title.status === 'show'">{{ layoutHint.layout['head'] ? layoutHint.layout['head'] :  layoutHint.type | titlecase }}</strong>
       <ng-container *ngIf="layoutHint.template?.head then layoutHint.template?.head else empty"></ng-container>
   </div>
   <div class="notification-body" *ngIf="layoutHint.layout['body']['status'] === 'show'">
-      <ng-container *ngIf="layoutHint.template?.body then layoutHint.template?.body else defaultButton"></ng-container>
+      <ng-container *ngIf="layoutHint.template?.body then layoutHint.template?.body else empty"></ng-container>
       <div *ngFor="let notice of data"  class="notification-body-row">
           {{ notice.message }}
       </div>
