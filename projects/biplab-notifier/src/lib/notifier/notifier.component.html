@@ -2,14 +2,14 @@
     <ng-template [ngIf]="!customTemplate && layout === 'single'">
       <biplab-notification 
         [layoutHint]="notificationHint"
-        (close)="close()"
+        (close)="close($event)"
         >
       </biplab-notification>
     </ng-template>
     <ng-template [ngIf]="!customTemplate && layout === 'multi'">
       <biplab-notifications
         [layoutHint]="notificationHint"
-        (close)="close()"
+        (close)="close($event)"
         >
       </biplab-notifications>
     </ng-template>

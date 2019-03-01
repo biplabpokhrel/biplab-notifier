@@ -4,4 +4,5 @@ export interface NotifierTemplate {
     head?: TemplateRef<any>;
     body?: TemplateRef<any>;
     button?: TemplateRef<any>;
+    footer?: TemplateRef<any>;
 }

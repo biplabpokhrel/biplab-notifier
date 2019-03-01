@@ -9,9 +9,14 @@ export class AppComponent {
   notification = new Notification();
   title = 'notifications';
   constructor() {
-    this.notification.title = 'hide';
+
+    this.notification.title = 'show';
     this.notification.type = 'success';
-    this.notification.message = 'You will see this message with success title';
+    this.notification.message = '!! You will see this message with success title';
+    this.notification.css.background = 'darkblue';
+    this.notification.css.width = '400px';
+    this.notification.css.height = 'auto';
+    this.notification.isDailog = true;
     this.notification.show();
   }
 }

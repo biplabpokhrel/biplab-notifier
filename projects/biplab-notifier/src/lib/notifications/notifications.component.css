@@ -1,69 +1,136 @@
-.notification {
-    padding: 10px;
-    color: white;
-    opacity: 1;
-    transition: opacity 0.6s;
+.notification-multi {
+  opacity: 1;
+  transition: opacity 0.6s;
 }
 
-.success {background-color: #4CAF50;}
-.note {background-color: #2196F3;}
-.warn {background-color: #ff9800;}
-.help {background-color: rgb(2, 64, 114);}
-.error {background-color: #f44336;}
-
-.notification-body {
-    background: rgb(220, 219, 219, 0.5);
-    padding: 15px 10px;
+/* The Modal (background) */
+.notification-multi-container {
+  display: block;
 }
 
-.notification-body-row {
+.notification-multi-content{
+    background-color: #f1ecec;
+    margin: auto;
+    padding: 0;
+}
+
+.notification-multi-message-row {
     padding: 3px 0px;
     width: 100%;
 }
 
-.notification-btn-row {
-    padding: 15px 0px 5px 0px;
+
+.notification-multi-dialog{
+    display: block;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.509); /* Black w/ opacity */  
 }
 
-.closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-}
+/* The Modal (background) */
+.notification-multi-dialog-container {
+    display: block;
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    overflow: auto; /* Enable scroll if needed */
+    transform: translate(-50%, -50%);
+  }
   
-.closebtn:hover {
-    color: black;
-}
+  .notification-multi-message-row {
+    padding: 3px 0px;
+    width: 100%;
+  }
+  /* Modal Content */
+  .notification-multi-dialog-content {
+    border-radius: 5px;
+    position: relative;
+    background-color: #f1ecec;
+    margin: auto;
+    padding: 0;
+    border: 1px solid rgba(41, 40, 40, 0.466);
+  }
+  
+  
+  /* The Close Button */
+  .notification-multi-close {
+    float: right;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .notification-multi-close:hover,
+  .notification-multi-close:focus {
+    text-decoration: none;
+    cursor: pointer;
+    color: red;
+  }
+  
+  .notification-multi-title {
+    padding: 15px;
+  }
+  
+  .notification-multi-header {
+    padding: 2px 16px;
+  }
 
+  .notification-multi-parent-body {
+    padding: 1px;
+  }
 
-.notificationbtn {
+  .notification-multi-body {
+      margin: 0px 15px; 
+      padding: 16px;
+      font-size: 18px;
+  }
+  
+  .notification-multi-footer {
+    padding: 12px 16px;
+  }
+  
+  .notification-multi-button {
+    border: none;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
     display: inline-block;
-    padding:0.5em 1.2em;
-    margin:0 0.3em 0.3em 0;
-    border-radius:0.15em;
-    box-sizing: border-box;
-    text-decoration:none;
-    font-family:'Roboto',sans-serif;
-    text-transform:uppercase;
-    font-weight:400;
-    color:#FFFFFF;
-    box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
-    text-align:center;
-    position:relative;
+    margin: 4px 2px 5px 0px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 3px;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: 18px;
+    font-weight: 500;
   }
 
-  .notificationbtn:active{
-    top:0.1em;
+  .notification-multi-primary-btn:hover {
+    background: rgb(6, 160, 26, 0.25);
+    color: black; 
+  }
+  
+  .notification-multi-primary-btn {
+    color: rgba(2, 150, 22, 0.7);
+    background: transparent;
   }
 
-@media all and (max-width:30em){
-    notificationbtn{
-    display:block;
-    margin:0.4em auto;
-    }
-}
+  .notification-multi-warning-btn{
+    color: rgb(155, 3, 3);
+    background: transparent;
+  }
+
+  .notification-multi-warning-btn:hover {
+    background: rgb(155, 3, 3, 0.25);
+    color: black;
+  }
+
+  .notification-multi-action {
+    padding: 0px 0px 10px 10px;
+  }
