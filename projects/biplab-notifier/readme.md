@@ -22,8 +22,8 @@ biplab-notifier
 |  message: string | You will use if you want  to pass single value |
 |  message: string[] | You will use if you want to pass multiple values |
 |  layoutType: 'single' or 'multi' | Default is single, meaning you can only set data to `message` attribute, Always remember to set `layoutType` as 'multi' if you want to set list of values in notices attribute otherwise it will generate error |
-| afterClose | Will notify you whenever notifaction closed |
-| afterOpen | Will notify you whenever notifaction opened |
+| afterClose: Observable<boolean> | Will notify you whenever notifaction closed |
+| afterOpen: Observable<boolean> | Will notify you whenever notifaction opened |
 | falseButton: string | Change text of false action button  |
 | trueButton: string | Change text of true action button |
 | title: `show` or `hide` | Change title visibility, default is `show` |
