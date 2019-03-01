@@ -52,8 +52,19 @@ biplab-notifier
 |  hide | Will hide the notification |
 
 
-### Implementation 1
-In component file
+### Implementation 1 ( Getting started )
+Import NotifierModule from  biplab-notifier
+``` import { NotifierModule } from 'biplab-notifier ```
+```
+@NgModule({
+  imports:      [ BrowserModule, FormsModule, NotifierModule ],
+  declarations: [ AppComponent ],
+  bootstrap:    [ AppComponent ]
+})
+export class AppModule { }
+```
+
+In component file import Notification from biplab-notifier and initilize it
 ```
 // First Import Notification class
 import { Notification } from 'biplab-notifier';
@@ -75,32 +86,10 @@ constructor() {
 }
 
 ```
-In Template file ( HTML )
+In Template file pass current notification instance ( HTML )
 ``` 
-  Click <a href="#" (click)="show()"> here </a> show notifier
-  <hr>
-  This is original 
   <biplab-notifier [(notification)]="notification"></biplab-notifier>
 
-
-  <hr>
-  This is custom 
-  <ng-template let-data="data" #body>
-    <div style="background: rgb(175, 167, 167); padding: 15px; margin:  10px 15px;">
-     <strong> This is custom body </strong>
-     <hr>
-      <li *ngFor="let m of data">{{ m.message }}</li>
-    </div>
-  </ng-template>
-
-  <ng-template let-event="event" #dismiss>
-    <button (click)="event.emit(true)" style="background: yellow; padding: 15px; padding:  10px 15px;"> Custom Close Button </button>
-  </ng-template>
-  <biplab-notifier
-    [notifierTemplates]="{'body': body, 'button': dismiss}"
-    [(notification)]="notification">
-  </biplab-notifier>
-  
 ```
 
 [Few examples are here ](https://stackblitz.com/edit/biplab-notifier-custom-template)
