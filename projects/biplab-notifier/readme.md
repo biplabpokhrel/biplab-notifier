@@ -16,9 +16,9 @@ biplab-notifier
 |-----------|-------------|
 | typeIcon?: TemplateRef<any> | Will be seen with the title text |
 | head?: TemplateRef<any> | Will overried the existing head |
-| body?: TemplateRef<any> | Will overried the existing body ( Only application of multi layout notifier ) |
-| button?: TemplateRef<any> | Will overried the existing default buttons ( Only application of multi layout notifier ) |
-| footer?: TemplateRef<any> | Will add default buttons ( Only application of multi layout notifier ) |
+| body?: TemplateRef<any> | Will overried the existing body |
+| button?: TemplateRef<any> | Will overried the existing default buttons |
+| footer?: TemplateRef<any> | Will add footer |
 
 `Notification` is a class, which contain all configuration need to execute biplab-notifier
 
