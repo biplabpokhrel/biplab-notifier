@@ -21,14 +21,23 @@ export class IconTemplateComponent implements OnInit {
     this.notificationMulti.body = 'show';
     this.notificationMulti.title = 'show';
     this.notificationMulti.type = 'note';
-    this.notificationMulti.messages = ['Message1', 'Message2'];
+   // this.notificationMulti.messages = ['Message1', 'Message2'];
     this.notificationMulti.closeButton = 'show';
-    this.notificationMulti.dismissButton = 'show';
-
-    this.notificationMulti.show();
+    this.notificationMulti.css.height = 'auto';
   }
 
   ngOnInit() {
+  }
+
+  openInPage() {
+    this.notificationMulti.isDailog = false;
+    this.notificationMulti.show();
+  }
+
+  openDailog() {
+    this.notificationMulti.isDailog = true;
+    this.notificationMulti.disableOutsideClick = true;
+    this.notificationMulti.show();
   }
 
 }

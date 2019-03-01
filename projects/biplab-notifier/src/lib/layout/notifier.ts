@@ -1,6 +1,13 @@
 import { Message } from '../message/notifer';
 import { NotifierTemplate } from '../template/notifier';
 
+export interface Css {
+    background?: string;
+    color?: string;
+    width?: string;
+    height?: string;
+}
+
 interface Visibility {
     status: 'show' | 'hide';
 }
@@ -8,7 +15,7 @@ interface Visibility {
 export class NotifcationLayout {
     layout: MultiNotifier | SingleNotifier;
     constructor(type?: MultiNotifier | SingleNotifier) {
-        this.layout = type || new SingleNotifier();
+      this.layout = type || new SingleNotifier();
     }
 }
 
@@ -23,12 +30,18 @@ export class SingleNotifier {
 
 export class MultiNotifier extends SingleNotifier {
     head?: string;
-    dismissButton?: Visibility;
+    actionRow?: Visibility;
     body?: Visibility;
-
-    constructor(dismissButton?: Visibility, body?: Visibility) {
+    constructor(
+        actionRow?: Visibility,
+        body?: Visibility,
+        public titleText?: string,
+        public isDailog = false,
+        public trueButtonText = 'OK',
+        public falseButtonText = 'Cancel',
+        public disableOutsideClick = false) {
         super();
-        this.dismissButton = dismissButton || { status: 'show' };
+        this.actionRow = actionRow || { status: 'show' };
         this.body = body || { status: 'show' };
         this.head = '';
     }
@@ -39,4 +52,5 @@ export interface NotificationHint {
     layout: SingleNotifier | MultiNotifier;
     data: Message | Message[];
     type: string;
+    css?: Css;
 }

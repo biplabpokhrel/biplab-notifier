@@ -22,8 +22,19 @@ biplab-notifier
 |  message: string | You will use if you want  to pass single value |
 |  message: string[] | You will use if you want to pass multiple values |
 |  layoutType: 'single' or 'multi' | Default is single, meaning you can only set data to `message` attribute, Always remember to set `layoutType` as 'multi' if you want to set list of values in notices attribute otherwise it will generate error |
-| @Output() afterClose | Will notify you whenever notifaction closed |
-| @Output() afterOpen | Will notify you whenever notifaction opened |
+| afterClose | Will notify you whenever notifaction closed |
+| afterOpen | Will notify you whenever notifaction opened |
+| falseButton: string | Change text of false action button  |
+| trueButton: string | Change text of true action button |
+| title: `show` or `hide` | Change title visibility, default is `show` |
+| closeButton: `show` or `hide`| Change closeButton visibility, default is `show` |
+| actionRow: `show` or `hide`| Change actionRow visibility, default is `show` |
+| body: `show` or `hide`| Change body visibility, default is `show`  |
+| isDailog: boolean | Change notifier to dialog, default is false  |
+| disableOutsideClick: boolean| Prevent closing dialog if clicked outside  |
+| header: string| Add header text ( Only application of multi layout notifier ) |
+| titleText: boolean| Set custom time |
+| css: Css| Override  width, height, color and background color of notifier |
 
 
 ### Notification methods

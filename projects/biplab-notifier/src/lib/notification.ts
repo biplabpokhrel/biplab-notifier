@@ -1,7 +1,7 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Message } from './message/notifer';
-import { NotifcationLayout, SingleNotifier, MultiNotifier } from './layout/notifier';
-import { Output, EventEmitter } from '@angular/core';
+import { NotifcationLayout, SingleNotifier, MultiNotifier, Css } from './layout/notifier';
+
 
 interface Timer {
     duration: number;
@@ -10,14 +10,20 @@ interface Timer {
 export class Notification extends NotifcationLayout  {
 
     private event =  new BehaviorSubject<boolean>(false);
-    @Output() afterClose = new BehaviorSubject<boolean>(false);
-    @Output() afterOpen = new BehaviorSubject<boolean>(false);
-    type: 'warn' | 'error' | 'note' | 'success' | 'help';
+    afterClose = new BehaviorSubject<boolean>(false);
+    afterOpen = new BehaviorSubject<boolean>(false);
+    private notificationType: 'warn' | 'error' | 'note' | 'success' | 'help' | 'other';
     timer?: Timer;
     status: 'activate' | 'deactivate';
     data: Message | Message[];
 
-    constructor(layoutType?: 'single' | 'multi') {
+    constructor(
+        layoutType?: 'single' | 'multi',
+        public css: Css = {
+            background: undefined,
+            color: undefined,
+            width: undefined,
+            height: undefined }) {
         super();
         this.status = 'deactivate';
         if (layoutType) {
@@ -26,14 +32,7 @@ export class Notification extends NotifcationLayout  {
     }
 
     set message(msg: string) {
-        if (this.layoutType === 'multi') {
-            console.error(`
-            Warning: incorrent layoutType i.e. ${ this.layoutType } or message/s set,
-            value will be ignore help: either set layoutType='multi'
-            and messages=['your message1', 'your message1']
-            or set layoutType='single' and message='Yourmessage'`,
-            );
-        } else {
+        if (this.layoutType === 'single') {
             this.data = new Message(msg);
         }
     }
@@ -41,13 +40,6 @@ export class Notification extends NotifcationLayout  {
     set messages(msgs: string[]) {
         if ( this.layoutType === 'multi') {
             this.data = msgs.map((msg: string) => new Message(msg));
-        } else {
-            console.error(`
-            Warning: incorrent layoutType set i.e. ${ this.layoutType } or message/s set,
-            value will be ignore help: either set layoutType='multi'
-            and messages=['your message1', 'your message1']
-            or set layoutType='single' and message='Yourmessage'`,
-            );
         }
     }
 
@@ -72,17 +64,37 @@ export class Notification extends NotifcationLayout  {
         this.afterOpen.next(true);
     }
 
-    hide() {
+    hide(why?: boolean) {
         this.event.next(false);
-        this.afterClose.next(true);
+        this.afterClose.next(why);
     }
 
+    set titleText(title: string) {
+        if ( this.layoutType === 'multi') {
+            const layout = this.layout as MultiNotifier;
+            layout.titleText = title;
+        }
+    }
     get action(): Observable<boolean> { return this.event; }
 
     set header(msg: string) {
         if ( this.layoutType === 'multi') {
             const layout = this.layout as MultiNotifier;
             layout.head = msg;
+        }
+    }
+
+    set isDailog(status: boolean) {
+        if ( this.layoutType === 'multi') {
+            const layout = this.layout as MultiNotifier;
+            layout.isDailog = status;
+        }
+    }
+
+    set disableOutsideClick(status: boolean) {
+        if ( this.layoutType === 'multi') {
+            const layout = this.layout as MultiNotifier;
+            layout.disableOutsideClick = status;
         }
     }
 
@@ -93,10 +105,10 @@ export class Notification extends NotifcationLayout  {
         }
     }
 
-    set dismissButton(status:  'show' | 'hide') {
+    set actionRow(status:  'show' | 'hide') {
         if ( this.layoutType === 'multi') {
             const layout = this.layout as MultiNotifier;
-            layout.dismissButton.status = status;
+            layout.actionRow.status = status;
         }
     }
 
@@ -108,4 +120,45 @@ export class Notification extends NotifcationLayout  {
         this.layout.title.status = status;
     }
 
+    set trueButton(text: string) {
+        if ( this.layoutType === 'multi') {
+            const layout = this.layout as MultiNotifier;
+            layout.trueButtonText = text;
+        }
+    }
+
+    set falseButton(text: string) {
+        if ( this.layoutType === 'multi') {
+            const layout = this.layout as MultiNotifier;
+            layout.falseButtonText = text;
+        }
+    }
+
+    get type(): 'warn' | 'error' | 'note' | 'success' | 'help' | 'other' {
+        return this.notificationType;
+    }
+
+    set type(_type: 'warn' | 'error' | 'note' | 'success' | 'help' | 'other') {
+        this.notificationType = _type;
+        /** default css setup */
+        if ( _type === 'success' ) {
+            this.css.background = '#4CAF50';
+            this.css.color = 'white';
+        } else if ( _type === 'error' ) {
+            this.css.background = '#f44336';
+            this.css.color = 'white';
+        } else if ( _type === 'warn' ) {
+            this.css.background = '#ff9800';
+            this.css.color = 'white';
+        }  else if ( _type === 'note' ) {
+            this.css.background = '#2196F3';
+            this.css.color = 'white';
+        }  else if ( _type === 'help' ) {
+            this.css.background = 'rgb(2, 64, 114)';
+            this.css.color = 'white';
+        }  else if ( _type === 'other' ) {
+            this.css.background = 'silver';
+            this.css.color = 'black';
+        }
+    }
 }

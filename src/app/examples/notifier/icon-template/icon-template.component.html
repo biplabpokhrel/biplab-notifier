@@ -1,23 +1,39 @@
+<hr>
 <p>
   icon-template
 </p>
 <ng-template #icon>
-  <span style="background: red; padding: 5px;">apple</span>
+  <span style="padding: 5px;">*</span>
 </ng-template>
-<ng-template #dismiss>
-    <span style="background: red; padding: 5px;">Cancel</span>
+<ng-template let-event="event" #dismiss>
+    <button (click)="event.emit(true)" style="background: red; padding: 15px;">Cancel</button>
 </ng-template>
-<ng-template #body>
-    <span style="background: rgb(175, 167, 167); padding: 15px;">This is body</span>
+<ng-template let-data="data" #body>
+    <div style="background: rgb(175, 167, 167); padding: 15px; margin:  0px 15px;">This is custom body
+      <li *ngFor="let m of data">{{ m.message }}</li>
+    </div>
 </ng-template>
 <ng-template #head>
-    <span style="background: rgb(175, 167, 167); padding: 15px;">This is head</span>
+  <div style="margin: 0px 15px;">
+      <h3>Confirmation custom head</h3>
+  </div>
+</ng-template>
+<ng-template #footer>
+    <div style="padding: 5px;">This is custom footer note</div>
 </ng-template>
 <biplab-notifier
   [(notification)]="notification">
 </biplab-notifier>
 <hr>
 <biplab-notifier
-  [notifierTemplates]="{'typeIcon': icon, 'body': body, 'button': dismiss, 'head': head}"
+  [notifierTemplates]="{
+    'typeIcon': icon,
+    'button': dismiss,
+    'head': head,
+    'footer': footer
+  }"
   [(notification)]="notificationMulti">
 </biplab-notifier>
+<button (click)="openDailog()">Open In Dialogbox</button>
+<button (click)="openInPage()">Open In Page</button>
+<hr>
