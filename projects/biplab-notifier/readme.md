@@ -11,6 +11,14 @@ biplab-notifier
 |  @Input() notification: Notification | You must have to pass as instance of `Notification` |
 |  @Input() notifierTemplates: NotifierTemplate | You can pass template to add icon for notification type, change ok button with something else, or add template in body or header |
 
+### NotifierTemplate
+|   Name    | Description|
+|-----------|-------------|
+| typeIcon?: TemplateRef<any> | Will be seen with the title text |
+| head?: TemplateRef<any> | Will overried the existing head |
+| body?: TemplateRef<any> | Will overried the existing body |
+| button?: TemplateRef<any> | Will overried the existing default buttons |
+| footer?: TemplateRef<any> | Will add footer |
 
 `Notification` is a class, which contain all configuration need to execute biplab-notifier
 
@@ -44,8 +52,7 @@ biplab-notifier
 |  hide | Will hide the notification |
 
 
-
-### Implementation
+### Implementation 1
 In component file
 ```
 // First Import Notification class
@@ -70,5 +77,30 @@ constructor() {
 ```
 In Template file ( HTML )
 ``` 
-<biplab-notifier [(notification)]="notification"></biplab-notifier>
+  Click <a href="#" (click)="show()"> here </a> show notifier
+  <hr>
+  This is original 
+  <biplab-notifier [(notification)]="notification"></biplab-notifier>
+
+
+  <hr>
+  This is custom 
+  <ng-template let-data="data" #body>
+    <div style="background: rgb(175, 167, 167); padding: 15px; margin:  10px 15px;">
+     <strong> This is custom body </strong>
+     <hr>
+      <li *ngFor="let m of data">{{ m.message }}</li>
+    </div>
+  </ng-template>
+
+  <ng-template let-event="event" #dismiss>
+    <button (click)="event.emit(true)" style="background: yellow; padding: 15px; padding:  10px 15px;"> Custom Close Button </button>
+  </ng-template>
+  <biplab-notifier
+    [notifierTemplates]="{'body': body, 'button': dismiss}"
+    [(notification)]="notification">
+  </biplab-notifier>
+  
 ```
+
+[Few examples are here ](https://stackblitz.com/edit/biplab-notifier-custom-template)
