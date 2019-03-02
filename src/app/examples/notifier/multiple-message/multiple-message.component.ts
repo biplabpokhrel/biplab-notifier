@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Notification } from 'biplab-notifier';
-
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-multiple-message',
   templateUrl: './multiple-message.component.html',
@@ -25,14 +25,19 @@ export class MultipleMessageComponent implements OnInit {
     this.notification.titleText = 'Delete';
     this.notification.header = 'Are you sure ??';
     this.notification.isDailog = true;
-    // this.notification.css.background = 'red';
-    // this.notification.css.color = 'white';
-    this.notification.show();
-
+    this.notification.css.background = 'red';
+    this.notification.css.color = 'white';
   }
 
   ngOnInit() {
-    this.notification.afterOpen.subscribe((d) => console.log(d));
+
+  }
+
+  show() {
+    this.notification.afterClosed
+    .pipe(filter((status: boolean) => status))
+    .subscribe((d) => console.log(d));
+    this.notification.show();
   }
 
 }

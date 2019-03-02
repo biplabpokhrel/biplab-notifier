@@ -13,10 +13,7 @@ export class AppComponent {
     this.notification.title = 'show';
     this.notification.type = 'success';
     this.notification.message = '!! You will see this message with success title';
-    this.notification.css.background = 'darkblue';
-    this.notification.css.width = '400px';
-    this.notification.css.height = 'auto';
-    this.notification.isDailog = true;
+  //  this.notification.isDailog = false;
     this.notification.show();
   }
 }

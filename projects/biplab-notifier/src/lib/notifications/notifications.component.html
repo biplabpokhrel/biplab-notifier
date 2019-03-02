@@ -8,15 +8,21 @@
       [ngStyle]="{'width': layoutHint.css?.width, 'height': layoutHint.css?.height}">
 
       <!-- Modal Title -->
+      <ng-template #mainTitle>
       <div class="notification-multi-title" [ngStyle]="{'background': layoutHint.css.background, 'color': layoutHint.css.color}">
         <ng-container *ngIf="layoutHint.template?.typeIcon then layoutHint.template?.typeIcon else empty"></ng-container>
         <ng-template [ngIf]="layoutHint.layout.closeButton.status === 'show'">
-          <span (click)="close.emit(true)" class="notification-multi-close">&times;</span>
+          <span (click)="notificationClose(false)" class="notification-multi-close">&times;</span>
         </ng-template>
         <ng-template [ngIf]="layoutHint.layout.title.status === 'show'">
-          <strong>{{ layoutHint.layout['titleText'] ? layoutHint.layout['titleText'] :  layoutHint.type | titlecase }} </strong>
+          <strong>{{ layoutHint.layout['titleText'] ? layoutHint.layout['titleText'] :  layoutHint.type }} </strong>
         </ng-template>
       </div>
+      </ng-template>
+      <ng-container *ngTemplateOutlet="layoutHint.template?.titleTemplate ? 
+        layoutHint.template?.titleTemplate : mainTitle; context:{ event: close}">
+      </ng-container>
+
       <!-- Modal header -->
       <ng-template #headTeample>
         <ng-template [ngIf]="layoutHint.layout['head']">
@@ -43,10 +49,10 @@
           <ng-template #bottonTemplate>
             <button
               class="notification-multi-button notification-multi-primary-btn"
-              (click)="close.emit(true)">
+              (click)="notificationClose(true)">
               {{layoutHint.layout['trueButtonText']}}
             </button>
-            <button class="notification-multi-button notification-multi-warning-btn" (click)="close.emit(false)">
+            <button class="notification-multi-button notification-multi-warning-btn" (click)="notificationClose(false)">
               {{layoutHint.layout['falseButtonText']}}
             </button>
           </ng-template>

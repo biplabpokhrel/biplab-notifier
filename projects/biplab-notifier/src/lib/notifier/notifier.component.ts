@@ -24,8 +24,7 @@ export class NotifierComponent implements OnInit {
   }
 
   close(event: boolean) {
-    this.notifier.deactivate();
-    this.notifier.notice.afterClose.next(event);
+    this.notifier.deactivate(event);
   }
 
   get status(): boolean {

@@ -23,4 +23,7 @@ export class NotificationComponent implements OnInit {
     }
   }
 
+  notificationClose(status: boolean) {
+    this.close.emit(status);
+  }
 }
