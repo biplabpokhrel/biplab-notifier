@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Notification } from 'biplab-notifier';
-
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-multiple-message',
   templateUrl: './multiple-message.component.html',
@@ -32,7 +32,14 @@ export class MultipleMessageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.notification.afterOpen.subscribe((d) => console.log(d));
+
+  }
+
+  show() {
+    // this.notification.afterClosed
+    // .pipe(filter((status: boolean) => status))
+    // .subscribe((d) => console.log(d));
+    // this.notification.show();
   }
 
 }

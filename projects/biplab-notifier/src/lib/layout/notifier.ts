@@ -20,6 +20,8 @@ export class NotifcationLayout {
 }
 
 export class SingleNotifier {
+
+
     closeButton: Visibility;
     title: Visibility;
     constructor(closeButton?: Visibility, title?: Visibility) {

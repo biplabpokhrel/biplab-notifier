@@ -1,4 +1,5 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Message } from './message/notifer';
 import { NotifcationLayout, SingleNotifier, MultiNotifier, Css } from './layout/notifier';
 
@@ -8,10 +9,9 @@ interface Timer {
 }
 
 export class Notification extends NotifcationLayout  {
-
-    private event =  new BehaviorSubject<boolean>(false);
-    afterClose = new BehaviorSubject<boolean>(false);
-    afterOpen = new BehaviorSubject<boolean>(false);
+    protected readonly _afterOpened = new Subject<void>();
+    protected readonly _afterClosed = new Subject<boolean | any>();
+    private readonly _event =  new BehaviorSubject<boolean>(false);
     private notificationType: 'warn' | 'error' | 'note' | 'success' | 'help' | 'other';
     timer?: Timer;
     status: 'activate' | 'deactivate';
@@ -59,14 +59,12 @@ export class Notification extends NotifcationLayout  {
         }
     }
 
-    show() {
-        this.event.next(true);
-        this.afterOpen.next(true);
+    show(): void {
+        this._event.next(true);
     }
 
-    hide(why?: boolean) {
-        this.event.next(false);
-        this.afterClose.next(why);
+    hide(why?: boolean): void {
+        this._event.next(why);
     }
 
     set titleText(title: string) {
@@ -75,7 +73,10 @@ export class Notification extends NotifcationLayout  {
             layout.titleText = title;
         }
     }
-    get action(): Observable<boolean> { return this.event; }
+
+    get action(): Observable<boolean> {
+        return this._event;
+    }
 
     set header(msg: string) {
         if ( this.layoutType === 'multi') {
@@ -160,5 +161,23 @@ export class Notification extends NotifcationLayout  {
             this.css.background = 'silver';
             this.css.color = 'black';
         }
+    }
+
+    get afterOpened(): Observable<void> {
+        return this._afterOpened.asObservable()
+        .pipe(take(1));
+    }
+
+    get afterClosed(): Observable<boolean | any> {
+        return this._afterClosed.asObservable()
+        .pipe(take(1));
+    }
+
+    set closed(status: boolean) {
+        this._afterClosed.next(status);
+    }
+
+    opened(): void {
+        this._afterOpened.next();
     }
 }
