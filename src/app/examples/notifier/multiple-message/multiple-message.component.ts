@@ -25,10 +25,8 @@ export class MultipleMessageComponent implements OnInit {
     this.notification.titleText = 'Delete';
     this.notification.header = 'Are you sure ??';
     this.notification.isDailog = true;
-    // this.notification.css.background = 'red';
-    // this.notification.css.color = 'white';
-    this.notification.show();
-
+    this.notification.css.background = 'red';
+    this.notification.css.color = 'white';
   }
 
   ngOnInit() {
@@ -36,10 +34,10 @@ export class MultipleMessageComponent implements OnInit {
   }
 
   show() {
-    // this.notification.afterClosed
-    // .pipe(filter((status: boolean) => status))
-    // .subscribe((d) => console.log(d));
-    // this.notification.show();
+    this.notification.afterClosed
+    .pipe(filter((status: boolean) => status))
+    .subscribe((d) => console.log(d));
+    this.notification.show();
   }
 
 }
