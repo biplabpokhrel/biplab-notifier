@@ -23,16 +23,11 @@ export class NotifierComponent implements OnInit {
     }
   }
 
-  close() {
-    this.notifier.deactivate();
+  close(event: boolean) {
+    this.notifier.deactivate(event);
   }
 
   get status(): boolean {
-    if (this.notifier.isActive && this.timer) {
-      setTimeout(() => {
-        this.close();
-      } , this.timer);
-    }
     return this.notifier.isActive;
   }
 
@@ -59,7 +54,8 @@ export class NotifierComponent implements OnInit {
       layout: this.notifier.notice.layout,
       data: this.notifier.notice.data,
       type: this.notifier.type,
-      template: this.notifierTemplates
+      template: this.notifierTemplates,
+      css: this.notifier.notice.css
     };
   }
 

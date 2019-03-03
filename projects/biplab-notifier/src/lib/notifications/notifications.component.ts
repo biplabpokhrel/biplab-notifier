@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
-import { MultiNotifier, NotificationHint } from '../layout/notifier';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild    } from '@angular/core';
+import { NotificationHint } from '../layout/notifier';
 import { Message } from '../message/notifer';
 import { isArray } from 'util';
-import { throws } from 'assert';
+import { MultiNotifier } from '../layout/notifier';
 
 @Component({
   selector: 'biplab-notifications',
@@ -10,6 +10,7 @@ import { throws } from 'assert';
   styleUrls: ['./notifications.component.css']
 })
 export class NotificationsComponent implements OnInit {
+  @ViewChild('parentDailog') myDiv: ElementRef;
   @Input() layoutHint: NotificationHint;
   @Output() close: EventEmitter<boolean>;
   data: Message[];
@@ -23,6 +24,19 @@ export class NotificationsComponent implements OnInit {
         this.data = <Message[]>this.layoutHint.data;
       }
     }
+  }
+
+  closeDailog(event) {
+    const layout = this.layoutHint.layout as MultiNotifier;
+    if ( layout.isDailog && !layout.disableOutsideClick ) {
+      if (event.target === this.myDiv.nativeElement) {
+        this.close.emit(false);
+      }
+    }
+  }
+
+  notificationClose(status: boolean) {
+    this.close.emit(status);
   }
 
 }

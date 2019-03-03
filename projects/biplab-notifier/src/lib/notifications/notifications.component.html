@@ -1,21 +1,68 @@
 <ng-template #empty></ng-template>
 <ng-template [ngIf]="layoutHint">
-  <div class="notification" [ngClass]=layoutHint.type >
-      <span *ngIf="layoutHint.layout.closeButton.status === 'show'" class="closebtn" (click)="close.emit(true)">&times;</span> 
-      <ng-container *ngIf="layoutHint.template?.typeIcon then layoutHint.template?.typeIcon else empty"></ng-container>
-      <strong *ngIf="layoutHint.layout.title.status === 'show'">{{ layoutHint.layout['head'] ? layoutHint.layout['head'] :  layoutHint.type | titlecase }}</strong>
-      <ng-container *ngIf="layoutHint.template?.head then layoutHint.template?.head else empty"></ng-container>
-  </div>
-  <div class="notification-body" *ngIf="layoutHint.layout['body']['status'] === 'show'">
-      <ng-container *ngIf="layoutHint.template?.body then layoutHint.template?.body else empty"></ng-container>
-      <div *ngFor="let notice of data"  class="notification-body-row">
-          {{ notice.message }}
+<div #parentDailog (click)="closeDailog($event)" [ngClass]="{ 'notification-multi-dialog': layoutHint.layout['isDailog'], 'notification-multi': !!!layoutHint.layout['isDailog']}">
+  <div [ngClass]="{ 'notification-multi-dialog-container': layoutHint.layout['isDailog'], 'notification-multi-container': !!!layoutHint.layout['isDailog']}">
+    <!-- Modal content -->
+    <div
+      [ngClass]="{ 'notification-multi-dialog-content': layoutHint.layout['isDailog'], 'notification-multi-content': !!!layoutHint.layout['isDailog'] }"
+      [ngStyle]="{'width': layoutHint.css?.width, 'height': layoutHint.css?.height}">
+
+      <!-- Modal Title -->
+      <ng-template #mainTitle>
+      <div class="notification-multi-title" [ngStyle]="{'background': layoutHint.css.background, 'color': layoutHint.css.color}">
+        <ng-container *ngIf="layoutHint.template?.typeIcon then layoutHint.template?.typeIcon else empty"></ng-container>
+        <ng-template [ngIf]="layoutHint.layout.closeButton.status === 'show'">
+          <span (click)="notificationClose(false)" class="notification-multi-close">&times;</span>
+        </ng-template>
+        <ng-template [ngIf]="layoutHint.layout.title.status === 'show'">
+          <strong>{{ layoutHint.layout['titleText'] ? layoutHint.layout['titleText'] :  layoutHint.type }} </strong>
+        </ng-template>
       </div>
-      <ng-template #defaultButton>
-        <div class="notification-btn-row" *ngIf="layoutHint.layout['dismissButton']['status'] === 'show'">
-          <a href="#" class="notificationbtn" (click)="close.emit(true)" [ngClass]=layoutHint.type >Ok</a>
+      </ng-template>
+      <ng-container *ngTemplateOutlet="layoutHint.template?.titleTemplate ? 
+        layoutHint.template?.titleTemplate : mainTitle; context:{ event: close}">
+      </ng-container>
+
+      <!-- Modal header -->
+      <ng-template #headTeample>
+        <ng-template [ngIf]="layoutHint.layout['head']">
+            <div class="notification-multi-header">
+                <h1> {{layoutHint.layout['head']}}</h1>
+            </div>
+        </ng-template>
+      </ng-template>
+      <ng-container *ngTemplateOutlet="layoutHint.template?.head ? layoutHint.template?.head : headTeample"></ng-container>
+      <div class="notification-multi-parent-body">
+      <!-- Modal Body -->
+      <ng-template #bodyTemplate>
+        <ng-template [ngIf]="!!data">
+          <div class="notification-multi-body">
+            <div class="notification-multi-message-row" *ngFor="let notice of data">{{ notice.message }}</div>
+          </div>
+        </ng-template>
+      </ng-template>
+      <ng-container *ngTemplateOutlet="layoutHint.template?.body ? layoutHint.template?.body : bodyTemplate; context:{ data: data }"></ng-container>
+
+      <!-- Modal action -->
+      <ng-template [ngIf]="layoutHint.layout['actionRow']['status'] === 'show'">
+        <div class="notification-multi-action">
+          <ng-template #bottonTemplate>
+            <button
+              class="notification-multi-button notification-multi-primary-btn"
+              (click)="notificationClose(true)">
+              {{layoutHint.layout['trueButtonText']}}
+            </button>
+            <button class="notification-multi-button notification-multi-warning-btn" (click)="notificationClose(false)">
+              {{layoutHint.layout['falseButtonText']}}
+            </button>
+          </ng-template>
+          <ng-container *ngTemplateOutlet="layoutHint.template?.button ? layoutHint.template?.button : bottonTemplate; context:{ 'event': close }"></ng-container>
         </div>
       </ng-template>
-      <ng-container *ngIf="layoutHint.template?.button then layoutHint.template?.button else defaultButton"></ng-container>
+      <!-- footer -->
+      <ng-container *ngIf="layoutHint.template?.footer then layoutHint.template?.footer else empty"></ng-container>
+      </div>
+    </div>
   </div>
+</div>
 </ng-template>

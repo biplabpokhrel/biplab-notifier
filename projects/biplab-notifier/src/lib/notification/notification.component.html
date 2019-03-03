@@ -1,10 +1,22 @@
 <ng-template #empty></ng-template>
 <ng-template [ngIf]="layoutHint">
-  <div class="notification" [ngClass]=layoutHint.type >
-      <span *ngIf="layoutHint.layout.closeButton.status === 'show'" class="closebtn" (click)="close.emit(true)">&times;</span>
+  <ng-template #mainTitle>
+    <div class="notification"
+      [ngStyle]="{
+        'width': layoutHint.css?.width,
+        'height': layoutHint.css?.height,
+        'background': layoutHint.css.background,
+        'color': layoutHint.css.color
+      }" >
+      <span *ngIf="layoutHint.layout.closeButton.status === 'show'" 
+        [ngStyle]="{'color': layoutHint.css.color}"
+        class="closebtn" 
+        (click)="notificationClose(false)">&times;</span>
       <ng-container *ngIf="layoutHint.template?.typeIcon then layoutHint.template?.typeIcon else empty"></ng-container>
-      <strong>{{ layoutHint.layout.title.status === 'hide' ? '' : layoutHint.type|titlecase }}</strong>
+      <ng-container *ngIf="layoutHint.layout.title.status === 'show'"><strong>{{ layoutHint.type|titlecase }}</strong></ng-container>
       <ng-container *ngIf="data"> {{ data.message }} </ng-container>
       <ng-container *ngIf="layoutHint.template?.head then layoutHint.template?.head else empty"></ng-container>
-  </div>
+    </div>
+  </ng-template>
+  <ng-container *ngTemplateOutlet="layoutHint.template?.titleTemplate ? layoutHint.template?.titleTemplate : mainTitle; context:{ event: close}"></ng-container>
 </ng-template>

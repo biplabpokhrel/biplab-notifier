@@ -3,10 +3,9 @@ import { Notification } from '../notification';
 
 export class Notifier {
     trigger = new BehaviorSubject<Notification>(new Notification());
-
     constructor(notification: Notification) {
         if (notification) {
-            this.trigger.next(notification);
+           this.trigger.next(notification);
             this.notice.action.subscribe((toggle: boolean) => {
                 if (toggle) {
                     this.activate();
@@ -37,12 +36,13 @@ export class Notifier {
         const notification = this.notice;
         notification.status = 'activate';
         this.trigger.next(notification);
+        notification.opened();
     }
 
-    deactivate() {
+    deactivate(status?: boolean) {
         const notification = this.notice;
         notification.status = 'deactivate';
         this.trigger.next(notification);
+        notification.closed = status;
     }
-
 }

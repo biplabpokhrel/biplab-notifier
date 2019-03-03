@@ -1,5 +1,11 @@
 This is success message
-<biplab-notifier [(notification)]="notification"></biplab-notifier>
+<ng-template #row let-event="event">
+  <div style="background: violet; padding: 15px;">
+    This is template
+    <button style="float: right; border: none; background: transparent" (click)="event.emit(true)">X</button>
+  </div>
+</ng-template>
+<biplab-notifier [notifierTemplates]="{ 'titleTemplate': row }" [(notification)]="notification"></biplab-notifier>
 
 <div>
   <app-custom-template></app-custom-template>

@@ -1,23 +1,30 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Message } from './message/notifer';
-import { NotifcationLayout, SingleNotifier, MultiNotifier } from './layout/notifier';
-import { Output, EventEmitter } from '@angular/core';
+import { NotifcationLayout, SingleNotifier, MultiNotifier, Css } from './layout/notifier';
 
-interface Timer {
+
+export interface Timer {
     duration: number;
 }
 
 export class Notification extends NotifcationLayout  {
+    protected readonly _afterOpened = new Subject<void>();
+    protected readonly _afterClosed = new Subject<boolean | any>();
+    private readonly _event =  new BehaviorSubject<boolean>(false);
+    private notificationType: 'warn' | 'error' | 'note' | 'success' | 'help' | 'other';
+    private _timer?: Timer;
+    private cancelTimer: any;
 
-    private event =  new BehaviorSubject<boolean>(false);
-    @Output() afterClose = new BehaviorSubject<boolean>(false);
-    @Output() afterOpen = new BehaviorSubject<boolean>(false);
-    type: 'warn' | 'error' | 'note' | 'success' | 'help';
-    timer?: Timer;
-    status: 'activate' | 'deactivate';
-    data: Message | Message[];
-
-    constructor(layoutType?: 'single' | 'multi') {
+    constructor(
+        layoutType?: 'single' | 'multi',
+        public status?:  'activate' | 'deactivate',
+        public data?: Message | Message[],
+        public css: Css = {
+            background: undefined,
+            color: undefined,
+            width: undefined,
+            height: undefined }) {
         super();
         this.status = 'deactivate';
         if (layoutType) {
@@ -26,14 +33,7 @@ export class Notification extends NotifcationLayout  {
     }
 
     set message(msg: string) {
-        if (this.layoutType === 'multi') {
-            console.error(`
-            Warning: incorrent layoutType i.e. ${ this.layoutType } or message/s set,
-            value will be ignore help: either set layoutType='multi'
-            and messages=['your message1', 'your message1']
-            or set layoutType='single' and message='Yourmessage'`,
-            );
-        } else {
+        if (this.layoutType === 'single') {
             this.data = new Message(msg);
         }
     }
@@ -41,13 +41,6 @@ export class Notification extends NotifcationLayout  {
     set messages(msgs: string[]) {
         if ( this.layoutType === 'multi') {
             this.data = msgs.map((msg: string) => new Message(msg));
-        } else {
-            console.error(`
-            Warning: incorrent layoutType set i.e. ${ this.layoutType } or message/s set,
-            value will be ignore help: either set layoutType='multi'
-            and messages=['your message1', 'your message1']
-            or set layoutType='single' and message='Yourmessage'`,
-            );
         }
     }
 
@@ -67,22 +60,51 @@ export class Notification extends NotifcationLayout  {
         }
     }
 
-    show() {
-        this.event.next(true);
-        this.afterOpen.next(true);
+    get timer(): Timer | null {
+        return this._timer;
     }
 
-    hide() {
-        this.event.next(false);
-        this.afterClose.next(true);
+    show(): void {
+        clearTimeout(this.cancelTimer);
+        this._event.next(true);
+        if (this.timer) {
+            this.cancelTimer = setTimeout(() => this.hide(false), this.timer.duration);
+        }
     }
 
-    get action(): Observable<boolean> { return this.event; }
+    hide(why?: boolean): void {
+        this._event.next(why);
+    }
+
+    set titleText(title: string) {
+        if ( this.layoutType === 'multi') {
+            const layout = this.layout as MultiNotifier;
+            layout.titleText = title;
+        }
+    }
+
+    get action(): Observable<boolean> {
+        return this._event;
+    }
 
     set header(msg: string) {
         if ( this.layoutType === 'multi') {
             const layout = this.layout as MultiNotifier;
             layout.head = msg;
+        }
+    }
+
+    set isDailog(status: boolean) {
+        if ( this.layoutType === 'multi') {
+            const layout = this.layout as MultiNotifier;
+            layout.isDailog = status;
+        }
+    }
+
+    set disableOutsideClick(status: boolean) {
+        if ( this.layoutType === 'multi') {
+            const layout = this.layout as MultiNotifier;
+            layout.disableOutsideClick = status;
         }
     }
 
@@ -93,10 +115,10 @@ export class Notification extends NotifcationLayout  {
         }
     }
 
-    set dismissButton(status:  'show' | 'hide') {
+    set actionRow(status:  'show' | 'hide') {
         if ( this.layoutType === 'multi') {
             const layout = this.layout as MultiNotifier;
-            layout.dismissButton.status = status;
+            layout.actionRow.status = status;
         }
     }
 
@@ -106,6 +128,70 @@ export class Notification extends NotifcationLayout  {
 
     set title(status:  'show' | 'hide') {
         this.layout.title.status = status;
+    }
+
+    set trueButton(text: string) {
+        if ( this.layoutType === 'multi') {
+            const layout = this.layout as MultiNotifier;
+            layout.trueButtonText = text;
+        }
+    }
+
+    set falseButton(text: string) {
+        if ( this.layoutType === 'multi') {
+            const layout = this.layout as MultiNotifier;
+            layout.falseButtonText = text;
+        }
+    }
+
+    get type(): 'warn' | 'error' | 'note' | 'success' | 'help' | 'other' {
+        return this.notificationType;
+    }
+
+    set type(_type: 'warn' | 'error' | 'note' | 'success' | 'help' | 'other') {
+        this.notificationType = _type;
+        /** default css setup */
+        if ( _type === 'success' ) {
+            this.css.background = '#4CAF50';
+            this.css.color = 'white';
+        } else if ( _type === 'error' ) {
+            this.css.background = '#f44336';
+            this.css.color = 'white';
+        } else if ( _type === 'warn' ) {
+            this.css.background = '#ff9800';
+            this.css.color = 'white';
+        }  else if ( _type === 'note' ) {
+            this.css.background = '#2196F3';
+            this.css.color = 'white';
+        }  else if ( _type === 'help' ) {
+            this.css.background = 'rgb(2, 64, 114)';
+            this.css.color = 'white';
+        }  else if ( _type === 'other' ) {
+            this.css.background = 'silver';
+            this.css.color = 'black';
+        }
+    }
+
+    set timer(_timer: Timer) {
+        this._timer = _timer;
+    }
+
+    get afterOpened(): Observable<void> {
+        return this._afterOpened.asObservable()
+        .pipe(take(1));
+    }
+
+    get afterClosed(): Observable<boolean | any> {
+        return this._afterClosed.asObservable()
+        .pipe(take(1));
+    }
+
+    set closed(status: boolean) {
+        this._afterClosed.next(status);
+    }
+
+    opened(): void {
+        this._afterOpened.next();
     }
 
 }

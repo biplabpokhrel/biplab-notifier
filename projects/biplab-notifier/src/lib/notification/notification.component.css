@@ -1,28 +1,19 @@
 .notification {
     padding: 15px 15px 15px 10px;
-    color: white;
     opacity: 1;
     transition: opacity 0.6s;
 }
 
-.success {background-color: #4CAF50;}
-.note {background-color: #2196F3;}
-.warn {background-color: #ff9800;}
-.help {background-color: rgb(2, 64, 114);}
-.error {background-color: #f44336;}
-
-
 .closebtn {
     margin-left: 15px;
-    color: white;
     font-weight: bold;
     float: right;
-    font-size: 22px;
+    font-size: 15px;
     line-height: 20px;
     cursor: pointer;
     transition: 0.3s;
 }
   
 .closebtn:hover {
-    color: black;
+    color: red;
 }

@@ -11,6 +11,14 @@ biplab-notifier
 |  @Input() notification: Notification | You must have to pass as instance of `Notification` |
 |  @Input() notifierTemplates: NotifierTemplate | You can pass template to add icon for notification type, change ok button with something else, or add template in body or header |
 
+### NotifierTemplate
+|   Name    | Description|
+|-----------|-------------|
+| typeIcon?: TemplateRef<any> | Will be seen with the title text |
+| head?: TemplateRef<any> | Will overried the existing head |
+| body?: TemplateRef<any> | Will overried the existing body |
+| button?: TemplateRef<any> | Will overried the existing default buttons |
+| footer?: TemplateRef<any> | Will add footer |
 
 `Notification` is a class, which contain all configuration need to execute biplab-notifier
 
@@ -22,8 +30,19 @@ biplab-notifier
 |  message: string | You will use if you want  to pass single value |
 |  message: string[] | You will use if you want to pass multiple values |
 |  layoutType: 'single' or 'multi' | Default is single, meaning you can only set data to `message` attribute, Always remember to set `layoutType` as 'multi' if you want to set list of values in notices attribute otherwise it will generate error |
-| @Output() afterClose | Will notify you whenever notifaction closed |
-| @Output() afterOpen | Will notify you whenever notifaction opened |
+| afterClosed: Observable<boolean> | Will notify you whenever notifaction closed |
+| afterOpened: Observable<void> | Will notify you whenever notifaction opened |
+| falseButton: string | Change text of false action button  |
+| trueButton: string | Change text of true action button |
+| title: `show` or `hide` | Change title visibility, default is `show` |
+| closeButton: `show` or `hide`| Change closeButton visibility, default is `show` |
+| actionRow: `show` or `hide`| Change actionRow visibility, default is `show` |
+| body: `show` or `hide`| Change body visibility, default is `show`  |
+| isDailog: boolean | Change notifier to dialog, default is false  |
+| disableOutsideClick: boolean| Prevent closing dialog if clicked outside  |
+| header: string| Add header text ( Only application of multi layout notifier ) |
+| titleText: boolean| Set custom time |
+| css: Css| Override  width, height, color and background color of notifier |
 
 
 ### Notification methods
@@ -33,9 +52,19 @@ biplab-notifier
 |  hide | Will hide the notification |
 
 
+### Implementation 1 ( Getting started )
+Import NotifierModule from  biplab-notifier
+``` import { NotifierModule } from 'biplab-notifier ```
+```
+@NgModule({
+  imports:      [ BrowserModule, FormsModule, NotifierModule ],
+  declarations: [ AppComponent ],
+  bootstrap:    [ AppComponent ]
+})
+export class AppModule { }
+```
 
-### Implementation
-In component file
+In component file import Notification from biplab-notifier and initilize it
 ```
 // First Import Notification class
 import { Notification } from 'biplab-notifier';
@@ -57,7 +86,10 @@ constructor() {
 }
 
 ```
-In Template file ( HTML )
+In Template file pass current notification instance ( HTML )
 ``` 
-<biplab-notifier [(notification)]="notification"></biplab-notifier>
+  <biplab-notifier [(notification)]="notification"></biplab-notifier>
+
 ```
+
+[Few examples are here ](https://stackblitz.com/edit/biplab-notifier-custom-template)
