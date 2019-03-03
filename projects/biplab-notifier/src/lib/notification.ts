@@ -4,7 +4,7 @@ import { Message } from './message/notifer';
 import { NotifcationLayout, SingleNotifier, MultiNotifier, Css } from './layout/notifier';
 
 
-interface Timer {
+export interface Timer {
     duration: number;
 }
 
@@ -13,12 +13,13 @@ export class Notification extends NotifcationLayout  {
     protected readonly _afterClosed = new Subject<boolean | any>();
     private readonly _event =  new BehaviorSubject<boolean>(false);
     private notificationType: 'warn' | 'error' | 'note' | 'success' | 'help' | 'other';
-    timer?: Timer;
-    status: 'activate' | 'deactivate';
-    data: Message | Message[];
+    private _timer?: Timer;
+    private cancelTimer: any;
 
     constructor(
         layoutType?: 'single' | 'multi',
+        public status?:  'activate' | 'deactivate',
+        public data?: Message | Message[],
         public css: Css = {
             background: undefined,
             color: undefined,
@@ -59,8 +60,16 @@ export class Notification extends NotifcationLayout  {
         }
     }
 
+    get timer(): Timer | null {
+        return this._timer;
+    }
+
     show(): void {
+        clearTimeout(this.cancelTimer);
         this._event.next(true);
+        if (this.timer) {
+            this.cancelTimer = setTimeout(() => this.hide(false), this.timer.duration);
+        }
     }
 
     hide(why?: boolean): void {
@@ -163,6 +172,10 @@ export class Notification extends NotifcationLayout  {
         }
     }
 
+    set timer(_timer: Timer) {
+        this._timer = _timer;
+    }
+
     get afterOpened(): Observable<void> {
         return this._afterOpened.asObservable()
         .pipe(take(1));
@@ -180,4 +193,5 @@ export class Notification extends NotifcationLayout  {
     opened(): void {
         this._afterOpened.next();
     }
+
 }

@@ -3,7 +3,6 @@ import { Notification } from '../notification';
 
 export class Notifier {
     trigger = new BehaviorSubject<Notification>(new Notification());
-
     constructor(notification: Notification) {
         if (notification) {
            this.trigger.next(notification);
