@@ -65,7 +65,6 @@ export class Notification extends NotifcationLayout  {
     }
 
     show(): void {
-        clearTimeout(this.cancelTimer);
         this._event.next(true);
         if (this.timer) {
             this.cancelTimer = setTimeout(() => this.hide(false), this.timer.duration);
@@ -173,6 +172,7 @@ export class Notification extends NotifcationLayout  {
     }
 
     set timer(_timer: Timer) {
+        clearTimeout(this.cancelTimer);
         this._timer = _timer;
     }
 
