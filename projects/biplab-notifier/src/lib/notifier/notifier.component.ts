@@ -28,11 +28,6 @@ export class NotifierComponent implements OnInit {
   }
 
   get status(): boolean {
-    if (this.notifier.isActive && this.timer) {
-      setTimeout(() => {
-        this.close(true);
-      } , this.timer);
-    }
     return this.notifier.isActive;
   }
 
