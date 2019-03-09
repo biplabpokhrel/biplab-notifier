@@ -6,6 +6,8 @@ export interface Css {
     color?: string;
     width?: string;
     height?: string;
+    shadow?: boolean;
+    position?: 'top'|'left'|'bottom'|'right'|'center'|'default';
 }
 
 interface Visibility {
@@ -20,32 +22,25 @@ export class NotifcationLayout {
 }
 
 export class SingleNotifier {
-
-
-    closeButton: Visibility;
-    title: Visibility;
-    constructor(closeButton?: Visibility, title?: Visibility) {
-        this.closeButton = closeButton || { status: 'show' };
-        this.title = title || { status: 'show' };
+    constructor(
+        public closeButton: Visibility = { status: 'show' },
+        public title: Visibility = { status: 'show' },
+        public displayAs: 'dialog' | 'snack-bar' | 'notification' = 'notification',
+        public disableOutsideClick: boolean = false) {
     }
 }
 
 export class MultiNotifier extends SingleNotifier {
-    head?: string;
-    actionRow?: Visibility;
-    body?: Visibility;
     constructor(
-        actionRow?: Visibility,
-        body?: Visibility,
+        public head: string = '',
+        public actionRow: Visibility =  { status: 'show' },
+        public body: Visibility =  { status: 'show' },
         public titleText?: string,
         public isDailog = false,
         public trueButtonText = 'OK',
         public falseButtonText = 'Cancel',
-        public disableOutsideClick = false) {
+        ) {
         super();
-        this.actionRow = actionRow || { status: 'show' };
-        this.body = body || { status: 'show' };
-        this.head = '';
     }
 }
 

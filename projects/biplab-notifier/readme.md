@@ -39,17 +39,43 @@ biplab-notifier
 | actionRow: `show` or `hide`| Change actionRow visibility, default is `show` |
 | body: `show` or `hide`| Change body visibility, default is `show`  |
 | isDailog: boolean | Change notifier to dialog, default is false  |
+| isSnack: boolean | Change notifier to snackbar, default is false  |
 | disableOutsideClick: boolean| Prevent closing dialog if clicked outside  |
 | header: string| Add header text ( Only application of multi layout notifier ) |
 | titleText: boolean| Set custom time |
-| css: Css| Override  width, height, color and background color of notifier |
+| css: Css| Override  width, height, color, background color of notifier |
 
+### css
+|   Name    | Description|
+|-----------|-------------|
+|  shadow: boolean | Will enable shadow |
+|  position: top, buttom, left, right, center | Will place the notifier into mentioned place |
+|  background: string | change background color in title bar |
+|  color: string |  change text color in title bar |
+|  width: string | change the width of the notifier |
+|  height: string |  change the height of the notifier |
 
 ### Notification methods
 |   Name    | Description|
 |-----------|-------------|
 |  show | Will show the notification |
 |  hide | Will hide the notification |
+
+#### ng-content for followling selector available
+- notifierIcon
+- notifierTitle
+- notifierMessages
+- notifierTrueButton
+- notifierFalseButton
+- notifierFooter
+
+In ng-template you can access  `notificationClose` method will close the notification and `data`
+```
+<ng-template #custom let-message="data" let-notificationClose="notificationClose" >
+  <div style="background: red; color: white; padding: 15px;">
+  </div>
+</ng-template>
+```
 
 
 ### Implementation 1 ( Getting started )

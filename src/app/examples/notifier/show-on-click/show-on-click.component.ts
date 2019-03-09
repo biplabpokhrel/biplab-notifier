@@ -56,13 +56,16 @@ export class ShowOnClickComponent implements OnInit {
 
   clickToShowWarnMulti() {
     this.notificationMulti.messages = ['warn1', 'warn2', 'warn3'];
+    this.notification.isDailog = true;
     this.notificationMulti.type = 'warn';
+    this.notificationMulti.css.shadow = false;
     this.notificationMulti.show();
   }
 
   clickToShowNoteMulti() {
     this.notificationMulti.messages = ['Note1', 'Note2', 'Note3'];
     this.notificationMulti.type = 'note';
+    this.notificationMulti.css.shadow = true;
     this.notificationMulti.show();
   }
 

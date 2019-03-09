@@ -5,7 +5,9 @@ This is success message
     <button style="float: right; border: none; background: transparent" (click)="event.emit(true)">X</button>
   </div>
 </ng-template>
-<biplab-notifier [notifierTemplates]="{ 'titleTemplate': row }" [(notification)]="notification"></biplab-notifier>
+<biplab-notifier [(notification)]="notification">
+ <span notifierTitle>WOW you see this too</span>
+</biplab-notifier>
 
 <div>
   <app-custom-template></app-custom-template>

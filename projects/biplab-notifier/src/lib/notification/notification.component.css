@@ -1,7 +1,147 @@
+body {
+  font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+  margin: 0;
+}
+
 .notification {
-    padding: 15px 15px 15px 10px;
     opacity: 1;
     transition: opacity 0.6s;
+}
+
+.notification-content  {
+    padding: 15px 15px 15px 10px;
+}
+
+.notification-shadow {
+    -webkit-box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    -moz-box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+}
+
+.snack-bar-shadow {
+    -webkit-box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    -moz-box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+}
+
+.dialog-shadow {
+    -moz-box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+    -webkit-box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+    box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+}
+
+
+.snack-bar {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    overflow: auto;
+}
+
+.snack-bar-content {
+    padding: 15px 15px 15px 10px;
+    position: fixed;
+}
+
+.dialog {
+    display: block;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.dialog-content {
+    margin: auto;
+    padding: 15px 15px 15px 10px;
+    border: 1px solid #888;
+    display: block;
+    position: fixed;
+    z-index: 999;
+    overflow: auto;
+    -webkit-animation-name: fadeIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s;
+  }
+
+.default {
+   margin: 0;
+   top: 0;
+   left: 0;
+   right: 0;
+}
+
+.top {
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -0);
+}
+
+.left {
+    left: 0;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.bottom {
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, -0);
+}
+
+.right {
+    right: 0;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.snack-bar-bottom-animation{
+    -webkit-animation-name: slideInBottom;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideInBottom;
+    animation-duration: 0.4s;
+}
+
+.snack-bar-top-animation{
+    -webkit-animation-name: slideInTop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideInTop;
+    animation-duration: 0.4s;
+}
+
+.snack-bar-left-animation{
+    -webkit-animation-name: slideInLeft;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideInLeft;
+    animation-duration: 0.4s;
+}
+
+.snack-bar-right-animation{
+    -webkit-animation-name: slideInRight;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideInRight;
+    animation-duration: 0.4s;
+}
+
+.snack-bar-center-animation{
+    -webkit-animation-name: fadeIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s;
 }
 
 .closebtn {
@@ -16,4 +156,56 @@
   
 .closebtn:hover {
     color: red;
+}
+
+
+/* Add Animation */
+@-webkit-keyframes slideInBottom {
+    from {bottom: -300px; opacity: 0} 
+    to {bottom: 0; opacity: 1}
+  }
+  
+@keyframes slideInBottom {
+    from {bottom: -300px; opacity: 0}
+    to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes slideInRight {
+    from {right: -300px; opacity: 0} 
+    to {right: 0; opacity: 1}
+  }
+  
+@keyframes slideInRight {
+    from {right: -300px; opacity: 0}
+    to {right: 0; opacity: 1}
+}
+
+@-webkit-keyframes slideInLeft {
+    from {left: -300px; opacity: 0} 
+    to {left: 0; opacity: 1}
+  }
+  
+@keyframes slideInLeft {
+    from {left: -300px; opacity: 0}
+    to {left: 0; opacity: 1}
+}
+
+@-webkit-keyframes slideInTop {
+    from {top: -300px; opacity: 0} 
+    to {top: 0; opacity: 1}
+  }
+  
+@keyframes slideInTop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+}
+  
+@keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
 }

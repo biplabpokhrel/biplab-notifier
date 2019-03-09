@@ -17,10 +17,33 @@ export class AutoHideMessageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.show();
+
+     this.notification.show();
   }
 
   show() {
+    // this.notification.isSnack = true;
+    // this.notification.isDailog = true;
+    // this.notification.css.s
+    this.notification.isNotification = true;
+    // this.notification.css.position = 'center';
+    this.notification.css.shadow = true;
+    this.notification.show();
+  }
+
+  showAsDialog() {
+    this.notification.isDailog = true;
+    this.notification.css.shadow = true;
      this.notification.show();
+  }
+
+  showAsSnack() {
+     this.notification.isSnack = true;
+     this.notification.css.position = 'center';
+     this.notification.show();
+  }
+
+  cancelAutoHide() {
+    this.notification.timer = null;
   }
 }

@@ -1,19 +1,24 @@
 <div *ngIf="notifier && status">
     <ng-template [ngIf]="!customTemplate && layout === 'single'">
-      <biplab-notification 
-        [layoutHint]="notificationHint"
-        (close)="close($event)"
-        >
+      <biplab-notification [layoutHint]="notificationHint" (close)="close($event)">
+        <span notificationIcon><ng-content select="[notifierIcon]"></ng-content></span>
+        <span notificationTitle><ng-content select="[notifierTitle]"></ng-content></span>
+        <span notificationMessage><ng-content select="[notifierMessage]"></ng-content></span>      
       </biplab-notification>
     </ng-template>
     <ng-template [ngIf]="!customTemplate && layout === 'multi'">
       <biplab-notifications
         [layoutHint]="notificationHint"
-        (close)="close($event)"
-        >
+        (close)="close($event)">
+        <span notificationIcon><ng-content select="[notifierIcon]"></ng-content></span>
+        <span notificationTitle><ng-content select="[notifierTitle]"></ng-content></span>
+        <span notificationMessages><ng-content select="[notifierMessages]"></ng-content></span>
+        <span notificationTrueButton><ng-content select="[notifierTrueButton]"></ng-content></span>
+        <span notificationFalseButton><ng-content select="[notifierFalseButton]"></ng-content></span>
+        <span notificationFooter><ng-content select="[notifierFooter]"></ng-content></span>
       </biplab-notifications>
     </ng-template>
     <ng-template [ngIf]="customTemplate">
-        <ng-container *ngTemplateOutlet="customTemplate;context:{ data: notificationHint }"></ng-container>
+        <ng-container *ngTemplateOutlet="customTemplate;context:{ data: notificationHint, notificationClose: close.bind(this) }"></ng-container>
     </ng-template>  
 </div>

@@ -21,6 +21,8 @@ export class Notification extends NotifcationLayout  {
         public status?:  'activate' | 'deactivate',
         public data?: Message | Message[],
         public css: Css = {
+            shadow: true,
+            position: 'default',
             background: undefined,
             color: undefined,
             width: undefined,
@@ -94,9 +96,23 @@ export class Notification extends NotifcationLayout  {
     }
 
     set isDailog(status: boolean) {
-        if ( this.layoutType === 'multi') {
-            const layout = this.layout as MultiNotifier;
-            layout.isDailog = status;
+        if (status) {
+            this.layout.displayAs = 'dialog';
+            this.css.position = 'center';
+        }
+    }
+
+    set isSnack(status: boolean) {
+        if (status) {
+            this.layout.displayAs = 'snack-bar';
+            this.css.position = 'bottom';
+        }
+    }
+
+    set isNotification(status: boolean) {
+        if (status) {
+            this.layout.displayAs = 'notification';
+            this.css.position = 'default';
         }
     }
 
@@ -154,7 +170,7 @@ export class Notification extends NotifcationLayout  {
             this.css.background = '#4CAF50';
             this.css.color = 'white';
         } else if ( _type === 'error' ) {
-            this.css.background = '#f44336';
+            this.css.background = '#cc0000';
             this.css.color = 'white';
         } else if ( _type === 'warn' ) {
             this.css.background = '#ff9800';
@@ -186,7 +202,7 @@ export class Notification extends NotifcationLayout  {
         .pipe(take(1));
     }
 
-    set closed(status: boolean) {
+    set close(status: boolean) {
         this._afterClosed.next(status);
     }
 

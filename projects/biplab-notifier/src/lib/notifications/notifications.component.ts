@@ -26,10 +26,10 @@ export class NotificationsComponent implements OnInit {
     }
   }
 
-  closeDailog(event) {
+  closeDailog(event: any) {
     const layout = this.layoutHint.layout as MultiNotifier;
-    if ( layout.isDailog && !layout.disableOutsideClick ) {
-      if (event.target === this.myDiv.nativeElement) {
+    if ( layout.displayAs === 'dialog' && !layout.disableOutsideClick ) {
+      if (event  && event.target === this.myDiv.nativeElement) {
         this.close.emit(false);
       }
     }
@@ -37,6 +37,10 @@ export class NotificationsComponent implements OnInit {
 
   notificationClose(status: boolean) {
     this.close.emit(status);
+  }
+
+  get shadow(): string {
+    return !!this.layoutHint.css.shadow ? `${ this.layoutHint.layout.displayAs }-shadow` : '';
   }
 
 }

@@ -30,7 +30,7 @@ export class IconTemplateComponent implements OnInit {
   }
 
   openInPage() {
-    this.notificationMulti.isDailog = false;
+    this.notificationMulti.isNotification = true;
     this.notificationMulti.show();
   }
 

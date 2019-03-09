@@ -43,6 +43,6 @@ export class Notifier {
         const notification = this.notice;
         notification.status = 'deactivate';
         this.trigger.next(notification);
-        notification.closed = status;
+        notification.close = status;
     }
 }
