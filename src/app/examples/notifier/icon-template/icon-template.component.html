@@ -5,8 +5,8 @@
 <ng-template #icon>
   <span style="padding: 5px;">*</span>
 </ng-template>
-<ng-template let-event="event" #dismiss>
-    <button (click)="event.emit(true)" style="background: red; padding: 15px;">Cancel</button>
+<ng-template let-notificationClose="notificationClose" #dismiss>
+    <button (click)="notificationClose(true)" style="background: red; padding: 15px;">Cancel</button>
 </ng-template>
 <ng-template let-data="data" #body>
     <div style="background: rgb(175, 167, 167); padding: 15px; margin:  0px 15px;">This is custom body
@@ -23,6 +23,7 @@
 </ng-template>
 <biplab-notifier
   [(notification)]="notification">
+  <div notifierTitle> Nice </div>
 </biplab-notifier>
 <hr>
 <biplab-notifier

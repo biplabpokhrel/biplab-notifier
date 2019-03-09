@@ -1,7 +1,10 @@
 
 <div>
     This is auto hide message
-    <biplab-notifier [(notification)]="notification">
-    </biplab-notifier>
-    <button (click)="show()">Show again</button>
+    <button (click)="show()">Show as notification</button>
+    <button (click)="showAsSnack()">Show as Snackbar</button>
+    <button (click)="showAsDialog()">Show as Dialog</button>
+    <button (click)="cancelAutoHide()">Cancel autohide</button>
 </div>
+<biplab-notifier [(notification)]="notification">
+</biplab-notifier>
