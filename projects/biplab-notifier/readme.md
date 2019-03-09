@@ -48,7 +48,7 @@ biplab-notifier
 ### css
 |   Name    | Description|
 |-----------|-------------|
-|  shadow: boolean | Will enable shadow |
+|  shadow: boolean | Will enable shadow if set as true |
 |  position: top, buttom, left, right, center | Will place the notifier into mentioned place |
 |  background: string | change background color in title bar |
 |  color: string |  change text color in title bar |
