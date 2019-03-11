@@ -17,7 +17,6 @@ export class NotificationComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.layoutHint);
     if ( this.layoutHint ) {
       if (!isArray(this.layoutHint.data)) {
         this.data = <Message>this.layoutHint.data;
