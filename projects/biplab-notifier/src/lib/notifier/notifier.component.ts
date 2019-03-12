@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, TemplateRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { Notifier } from '../action/notifier';
 import { MultiNotifier, SingleNotifier, NotificationHint } from '../layout/notifier';
 import { Notification } from '../notification';
 import { NotifierTemplate } from '../template/notifier';
+import { NotificationButton } from 'biplab-notifier/lib/layout/notifier';
 
 @Component({
   selector: 'biplab-notifier',
@@ -23,13 +24,14 @@ export class NotifierComponent implements OnInit {
     }
   }
 
-  close(event: boolean) {
+  close(event: any) {
     this.notifier.deactivate(event);
   }
 
   get status(): boolean {
     return this.notifier.isActive;
   }
+
 
   get timer(): number | null {
     if ( this.notifier.notice.timer ) {
@@ -55,7 +57,8 @@ export class NotifierComponent implements OnInit {
       data: this.notifier.notice.data,
       type: this.notifier.type,
       template: this.notifierTemplates,
-      css: this.notifier.notice.css
+      css: this.notifier.notice.css,
+      buttons: this.notifier.notice.actionButtons
     };
   }
 

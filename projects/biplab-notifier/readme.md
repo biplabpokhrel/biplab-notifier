@@ -44,6 +44,16 @@ biplab-notifier
 | header: string| Add header text ( Only application of multi layout notifier ) |
 | titleText: boolean| Set custom time |
 | css: Css| Override  width, height, color, background color of notifier |
+| actionButtons: NotificationButton[]| There are the button appear in multi notification form |
+
+### NotificationButton
+|   Name    | Description|
+|-----------|-------------|
+| text: string | Will be seen button label |
+| disabled: boolean | Will be seen disable button if set as true |
+| type: 'button' or 'submit' | Default is button |
+| emitValue: any | This is the value button will return after clicked |
+| callBackFunction: { func: Function, param: any }[] | You can bind the function list with the button |
 
 ### css
 |   Name    | Description|
@@ -60,6 +70,12 @@ biplab-notifier
 |-----------|-------------|
 |  show | Will show the notification |
 |  hide | Will hide the notification |
+|  buttonShadow('show'|'hide') | Will hide or show shadow in button |
+|  buttonColorReverse | Will change button font color into background and vise versa  |
+|  buttonColorReverse | Will change button font color into background and vise versa  |
+|  defaultButtons(actionButtons?: NotificationButton[]) | Will add 2 buttons ( Yes and Cancel ) |
+|applyThemeColorInTrueButtons()| Will apply same color as applied in title|
+|addNewButton(button: label: string)|Will add new button|
 
 #### ng-content for followling selector available
 - notifierIcon

@@ -1,6 +1,15 @@
 import { Message } from '../message/notifer';
 import { NotifierTemplate } from '../template/notifier';
 
+export interface NotificationButton {
+    type: 'button' | 'submit';
+    disabled: boolean;
+    css: Css;
+    text: string;
+    emitValue: any;
+    callBackFunctions?: { func: Function, param?: any }[];
+}
+
 export interface Css {
     background?: string;
     color?: string;
@@ -36,9 +45,7 @@ export class MultiNotifier extends SingleNotifier {
         public actionRow: Visibility =  { status: 'show' },
         public body: Visibility =  { status: 'show' },
         public titleText?: string,
-        public isDailog = false,
-        public trueButtonText = 'OK',
-        public falseButtonText = 'Cancel',
+        public isDailog = false
         ) {
         super();
     }
@@ -50,4 +57,5 @@ export interface NotificationHint {
     data: Message | Message[];
     type: string;
     css?: Css;
+    buttons?: NotificationButton[];
 }

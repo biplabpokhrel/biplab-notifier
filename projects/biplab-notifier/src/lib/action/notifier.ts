@@ -12,6 +12,10 @@ export class Notifier {
                 } else {
                     this.deactivate();
                 }
+                if (!this.notice.actionButtons || this.notice.actionButtons.length === 0) {
+                    this.notice.defaultButtons();
+                }
+
             });
         }
     }
@@ -39,7 +43,7 @@ export class Notifier {
         notification.opened();
     }
 
-    deactivate(status?: boolean) {
+    deactivate(status?: any) {
         const notification = this.notice;
         notification.status = 'deactivate';
         this.trigger.next(notification);
