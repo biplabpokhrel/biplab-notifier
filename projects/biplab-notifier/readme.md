@@ -44,7 +44,7 @@ biplab-notifier
 | header: string| Add header text ( Only application of multi layout notifier ) |
 | titleText: boolean| Set custom time |
 | css: Css| Override  width, height, color, background color of notifier |
-| actionButtons: NotificationButton[]| There are the button appear in multi notification form |
+| actionButtons: NotificationButton[]| These are the buttons appear in multi notification form |
 
 ### NotificationButton
 |   Name    | Description|
@@ -73,7 +73,7 @@ biplab-notifier
 |  buttonShadow('show'|'hide') | Will hide or show shadow in button |
 |  buttonColorReverse | Will change button font color into background and vise versa  |
 |  buttonColorReverse | Will change button font color into background and vise versa  |
-|  defaultButtons(actionButtons?: NotificationButton[]) | Will add 2 buttons ( Yes and Cancel ) |
+|  defaultButtons(actionButtons?: NotificationButton[]) | Will add 2 buttons ( Yes and Cancel ) if not provided |
 |applyThemeColorInTrueButtons()| Will apply same color as applied in title|
 |addNewButton(button: label: string)|Will add new button|
 

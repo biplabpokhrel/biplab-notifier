@@ -3,7 +3,7 @@ import { Notifier } from '../action/notifier';
 import { MultiNotifier, SingleNotifier, NotificationHint } from '../layout/notifier';
 import { Notification } from '../notification';
 import { NotifierTemplate } from '../template/notifier';
-import { NotificationButton } from 'biplab-notifier/lib/layout/notifier';
+
 
 @Component({
   selector: 'biplab-notifier',
