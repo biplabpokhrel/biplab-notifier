@@ -54,14 +54,23 @@
         <div class="notification-multi-action">
           <ng-template #bottonTemplate>
             <button
-              class="notification-multi-button notification-multi-primary-btn"
-              (click)="notificationClose(true)">
-              <ng-content select="[notificationTrueButton]"></ng-content>
-              {{layoutHint.layout['trueButtonText']}}
-            </button>
-            <button class="notification-multi-button notification-multi-warning-btn" (click)="notificationClose(false)">
-                <ng-content select="[notificationFalseButton]"></ng-content>
-              {{layoutHint.layout['falseButtonText']}}
+              *ngFor="let button of layoutHint.buttons"
+              [disabled]="button?.disabled"
+              [type]="button?.type"
+              (click)="click(button)"
+              [ngClass]="{ 'button-shadow': button.css?.shadow}"
+              [ngStyle]="{
+                'color': button.css?.color,
+                'background': button.css?.background
+              }"
+              >
+              <ng-template [ngIf]="buttonStatus(button)">
+                <ng-content select="[notificationTrueButton]"></ng-content>
+              </ng-template>
+              <ng-template  [ngIf]="!buttonStatus(button)">
+                 <ng-content select="[notificationFalseButton]"></ng-content>
+              </ng-template>
+              {{ button.text }}
             </button>
           </ng-template>
           <ng-container *ngTemplateOutlet="layoutHint.template?.button ? layoutHint.template?.button : bottonTemplate; context:{ 'data': data, 'event': close, 'notificationClose': notificationClose.bind(this) }"></ng-container>
@@ -72,6 +81,5 @@
       <ng-content select="[notificationFooter]"></ng-content>
       </div>
     </div>
-
 </div>
 </ng-template>

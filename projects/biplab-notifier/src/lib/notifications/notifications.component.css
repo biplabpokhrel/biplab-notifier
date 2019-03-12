@@ -261,43 +261,62 @@ body {
   .notification-multi-footer {
     padding: 12px 16px;
   }
-  
-  .notification-multi-button {
-    border: none;
-    padding: 16px 24px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin: 4px 2px 5px 0px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border-radius: 3px;
-    font-family: Roboto,"Helvetica Neue",sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-  }
 
-  .notification-multi-primary-btn:hover {
-    background: rgb(6, 160, 26, 0.25);
-    color: black; 
-  }
-  
-  .notification-multi-primary-btn {
-    color: rgba(2, 150, 22, 0.7);
-    background: transparent;
-  }
+button {
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  -webkit-appearance: button;
+  background: 0 0;
+  align-items: flex-start;
+  box-sizing: border-box;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-block;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: baseline;
+  text-align: center;
+  margin: 0;
+  min-width: 64px;
+  line-height: 36px;
+  padding: 0 16px;
+  border-radius: 4px;
+  overflow: visible;
+}
 
-  .notification-multi-warning-btn{
-    color: rgb(155, 3, 3);
-    background: transparent;
-  }
+button:hover {
+  text-decoration: underline;
+}
+
+.button-shadow{
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.notification-multi-primary-btn:hover {
+  background: #3f51b52a;
+}
+
+
+.notification-multi-warning-btn{
+  color: #f44336;
+}
 
   .notification-multi-warning-btn:hover {
-    background: rgb(155, 3, 3, 0.25);
-    color: black;
+    background: #f4433638;
   }
 
   .notification-multi-action {
     padding: 0px 0px 10px 10px;
+  }
+
+  .notification-multi-action button {
+    margin-right: 10px;
   }
