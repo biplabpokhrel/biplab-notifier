@@ -2,8 +2,6 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Message } from './message/notifer';
 import { NotifcationLayout, SingleNotifier, MultiNotifier, Css, NotificationButton } from './layout/notifier';
-import { Button } from 'protractor';
-
 
 export interface Timer {
     duration: number;
@@ -19,6 +17,7 @@ export class Notification extends NotifcationLayout  {
 
     constructor(
         layoutType?: 'single' | 'multi',
+        displayAs: 'dialog' | 'snack-bar' | 'notification' = 'notification',
         public status?:  'activate' | 'deactivate',
         public data?: Message | Message[],
         public css: Css = {
@@ -36,6 +35,14 @@ export class Notification extends NotifcationLayout  {
         }
         if (this.actionButtons) {
             this.defaultButtons();
+        }
+
+        if (displayAs === 'notification') {
+            this.isNotification = true;
+        } else if (displayAs === 'dialog') {
+            this.isDailog = true;
+        } else if (displayAs === 'snack-bar') {
+            this.isSnack = true;
         }
     }
 
@@ -79,6 +86,10 @@ export class Notification extends NotifcationLayout  {
                 button.disabled = status === 'disable' ? true : false;
             }
         });
+    }
+
+    get currentStatus(): 'hide' | 'show' {
+        return this.status === 'activate' ? 'hide' : 'show';
     }
 
     get trueActionButton(): NotificationButton {

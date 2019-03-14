@@ -25,7 +25,7 @@
       </div>
       </ng-template>
       <ng-container *ngTemplateOutlet="layoutHint.template?.titleTemplate ? 
-        layoutHint.template?.titleTemplate : mainTitle; context:{ 'data': data, event: close, 'notificationClose': notificationClose.bind(this)}">
+        layoutHint.template?.titleTemplate : mainTitle; context:{ 'data': messages, event: close, 'notificationClose': notificationClose.bind(this)}">
       </ng-container>
 
       <!-- Modal header -->
@@ -40,14 +40,14 @@
       <div class="notification-multi-parent-body">
       <!-- Modal Body -->
       <ng-template #bodyTemplate>
-        <ng-template [ngIf]="!!data">
+        <ng-template [ngIf]="messages">
           <div class="notification-multi-body">
-            <div class="notification-multi-message-row" *ngFor="let notice of data">{{ notice.message }}</div>
+            <div class="notification-multi-message-row" *ngFor="let message of messages">{{ message }}</div>
           </div>
         </ng-template>
       </ng-template>
       <ng-content select="[notificationMessages]"></ng-content>
-      <ng-container *ngTemplateOutlet="layoutHint.template?.body ? layoutHint.template?.body : bodyTemplate; context:{ data: data, 'notificationClose': notificationClose.bind(this) }"></ng-container>
+      <ng-container *ngTemplateOutlet="layoutHint.template?.body ? layoutHint.template?.body : bodyTemplate; context:{ data: messages, 'notificationClose': notificationClose.bind(this) }"></ng-container>
 
       <!-- Modal action -->
       <ng-template [ngIf]="layoutHint.layout['actionRow']['status'] === 'show'">
@@ -73,7 +73,7 @@
               {{ button.text }}
             </button>
           </ng-template>
-          <ng-container *ngTemplateOutlet="layoutHint.template?.button ? layoutHint.template?.button : bottonTemplate; context:{ 'data': data, 'event': close, 'notificationClose': notificationClose.bind(this) }"></ng-container>
+          <ng-container *ngTemplateOutlet="layoutHint.template?.button ? layoutHint.template?.button : bottonTemplate; context:{ 'data': messages, 'event': close, 'notificationClose': notificationClose.bind(this) }"></ng-container>
         </div>
       </ng-template>
       <!-- footer -->

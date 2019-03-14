@@ -11,17 +11,12 @@ export class NotificationComponent implements OnInit {
   @ViewChild('parentDailog') myDiv: ElementRef;
   @Input() layoutHint: NotificationHint;
   @Output() close: EventEmitter<boolean>;
-  data: Message;
+
   constructor() {
     this.close = new EventEmitter<boolean>();
   }
 
   ngOnInit() {
-    if ( this.layoutHint ) {
-      if (!isArray(this.layoutHint.data)) {
-        this.data = <Message>this.layoutHint.data;
-      }
-    }
   }
 
   closeDailog(event: any) {
@@ -39,4 +34,9 @@ export class NotificationComponent implements OnInit {
   get shadow(): string {
     return !!this.layoutHint.css.shadow ? `${ this.layoutHint.layout.displayAs }-shadow` : '';
   }
+
+  get message(): string {
+    return this.layoutHint && this.layoutHint.data ? this.layoutHint.data['message'] : '';
+  }
+
 }
