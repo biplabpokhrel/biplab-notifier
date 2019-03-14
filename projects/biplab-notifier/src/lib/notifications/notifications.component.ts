@@ -3,6 +3,7 @@ import { NotificationHint } from '../layout/notifier';
 import { Message } from '../message/notifer';
 import { isArray } from 'util';
 import { MultiNotifier, NotificationButton } from '../layout/notifier';
+import { throwError } from 'rxjs';
 
 
 @Component({
@@ -14,17 +15,12 @@ export class NotificationsComponent implements OnInit {
   @ViewChild('parentDailog') myDiv: ElementRef;
   @Input() layoutHint: NotificationHint;
   @Output() close: EventEmitter<any>;
-  data: Message[];
+
   constructor() {
     this.close = new EventEmitter<any>();
   }
 
   ngOnInit() {
-    if ( this.layoutHint ) {
-      if (isArray(this.layoutHint.data)) {
-        this.data = <Message[]>this.layoutHint.data;
-      }
-    }
   }
 
   closeDailog(event: any) {
@@ -46,7 +42,9 @@ export class NotificationsComponent implements OnInit {
         }
       }
     } else {
-      this.notificationClose(button.emitValue);
+      if ( button.type === 'button' ) {
+        this.notificationClose(button.emitValue);
+      }
     }
   }
   notificationClose(status: any) {
@@ -61,5 +59,11 @@ export class NotificationsComponent implements OnInit {
     return typeof(button.emitValue) === 'boolean' && button.emitValue;
   }
 
-
+  get messages(): string[] {
+    if (this.layoutHint && this.layoutHint.data) {
+      const rows = <Message[]>this.layoutHint.data || [ new Message('')];
+      return rows.map((row: Message) => row.message);
+    }
+    return [];
+  }
 }

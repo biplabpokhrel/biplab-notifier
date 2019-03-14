@@ -26,10 +26,10 @@
         <strong>{{ layoutHint.type|titlecase }}</strong>
       </ng-container>
       <ng-content select="[notificationMessage]"></ng-content>
-      <ng-container *ngIf="data"> {{ data.message }} </ng-container>
+      <ng-container *ngIf="layoutHint.data"> {{ message }} </ng-container>
       <ng-container *ngIf="layoutHint.template?.head then layoutHint.template?.head else empty"></ng-container>
     </div>
   </div>
   </ng-template>
-  <ng-container *ngTemplateOutlet="layoutHint.template?.titleTemplate ? layoutHint.template?.titleTemplate : mainTitle; context:{ 'data': data, 'notificationClose': notificationClose.bind(this)}"></ng-container>
+  <ng-container *ngTemplateOutlet="layoutHint.template?.titleTemplate ? layoutHint.template?.titleTemplate : mainTitle; context:{ 'data': message || '', 'notificationClose': notificationClose.bind(this)}"></ng-container>
 </ng-template>
