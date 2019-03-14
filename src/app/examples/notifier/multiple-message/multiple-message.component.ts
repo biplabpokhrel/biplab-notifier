@@ -12,6 +12,7 @@ export class MultipleMessageComponent implements OnInit {
     this.notification.type = 'note';
     this.notification.layoutType = 'multi';
     this.notification.body = 'hide';
+    this.notification.messages = ['hi'];
     this.notification.trueButton = 'Yes';
     this.notification.falseButton = 'No';
     this.notification.css.width = '300px';
