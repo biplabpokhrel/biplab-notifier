@@ -1,14 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AutoHideMessageComponent } from './auto-hide-message.component';
-
+import { NotifierModule } from 'biplab-notifier';
 describe('AutoHideMessageComponent', () => {
   let component: AutoHideMessageComponent;
   let fixture: ComponentFixture<AutoHideMessageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AutoHideMessageComponent ]
+      declarations: [ AutoHideMessageComponent ],
+      imports: [ NotifierModule ]
     })
     .compileComponents();
   }));
