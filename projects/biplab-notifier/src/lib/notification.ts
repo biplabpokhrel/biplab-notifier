@@ -89,7 +89,7 @@ export class Notification extends NotifcationLayout  {
     }
 
     get currentStatus(): 'hide' | 'show' {
-        return this.status === 'activate' ? 'hide' : 'show';
+        return this.status === 'activate' ? 'show' : 'hide';
     }
 
     get trueActionButton(): NotificationButton {

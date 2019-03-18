@@ -42,9 +42,11 @@ biplab-notifier
 | isSnack: boolean | Change notifier to snackbar, default is false  |
 | disableOutsideClick: boolean| Prevent closing dialog if clicked outside  |
 | header: string| Add header text ( Only application of multi layout notifier ) |
-| titleText: boolean| Set custom time |
+| titleText: string| Set title text for notification |
 | css: Css| Override  width, height, color, background color of notifier |
 | actionButtons: NotificationButton[]| These are the buttons appear in multi notification form |
+| trueActionButton: NotificationButton| Will give you the access of true button |
+| currentStatus: 'hide' or 'show' | Will give you the current status of the form |
 
 ### NotificationButton
 |   Name    | Description|
