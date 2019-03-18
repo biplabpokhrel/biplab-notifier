@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SnackbarComponent } from './snackbar.component';
+import { NotifierModule } from 'biplab-notifier';
 
 describe('SnackbarComponent', () => {
   let component: SnackbarComponent;
@@ -8,7 +9,8 @@ describe('SnackbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SnackbarComponent ]
+      declarations: [ SnackbarComponent ],
+      imports: [ NotifierModule ]
     })
     .compileComponents();
   }));

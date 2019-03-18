@@ -32,7 +32,7 @@ export class AutoHideMessageComponent implements OnInit {
   }
 
   showAsDialog() {
-    this.notification.isDailog = true;
+    this.notification.isDialog = true;
     this.notification.css.shadow = true;
      this.notification.show();
   }

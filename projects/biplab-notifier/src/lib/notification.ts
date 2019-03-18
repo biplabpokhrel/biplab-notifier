@@ -40,7 +40,7 @@ export class Notification extends NotifcationLayout  {
         if (displayAs === 'notification') {
             this.isNotification = true;
         } else if (displayAs === 'dialog') {
-            this.isDailog = true;
+            this.isDialog = true;
         } else if (displayAs === 'snack-bar') {
             this.isSnack = true;
         }
@@ -57,7 +57,7 @@ export class Notification extends NotifcationLayout  {
             {
                 text: 'Yes',
                 disabled: false,
-                type: 'submit',
+                type: 'button',
                 emitValue: true,
                 css: { color: '#3f51b5', background: 'transparent', shadow: true }
             },
@@ -89,7 +89,7 @@ export class Notification extends NotifcationLayout  {
     }
 
     get currentStatus(): 'hide' | 'show' {
-        return this.status === 'activate' ? 'hide' : 'show';
+        return this.status === 'activate' ? 'show' : 'hide';
     }
 
     get trueActionButton(): NotificationButton {
@@ -202,7 +202,7 @@ export class Notification extends NotifcationLayout  {
         }
     }
 
-    set isDailog(status: boolean) {
+    set isDialog(status: boolean) {
         if (status) {
             this.layout.displayAs = 'dialog';
             this.css.position = 'center';

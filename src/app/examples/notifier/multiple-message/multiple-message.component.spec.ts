@@ -1,14 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MultipleMessageComponent } from './multiple-message.component';
-
+import { NotifierModule } from 'biplab-notifier';
 describe('MultipleMessageComponent', () => {
   let component: MultipleMessageComponent;
   let fixture: ComponentFixture<MultipleMessageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MultipleMessageComponent ]
+      declarations: [ MultipleMessageComponent ],
+      imports: [ NotifierModule ]
     })
     .compileComponents();
   }));

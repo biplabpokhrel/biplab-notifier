@@ -18,7 +18,7 @@ jobs:
       - run: npm run package
       - run:
           name: Run tests
-          command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+          command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI  --code-coverage
 
       - save_cache:
           paths:

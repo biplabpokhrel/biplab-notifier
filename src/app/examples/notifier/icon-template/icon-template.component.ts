@@ -35,7 +35,7 @@ export class IconTemplateComponent implements OnInit {
   }
 
   openDailog() {
-    this.notificationMulti.isDailog = true;
+    this.notificationMulti.isDialog = true;
     this.notificationMulti.disableOutsideClick = true;
     this.notificationMulti.show();
   }

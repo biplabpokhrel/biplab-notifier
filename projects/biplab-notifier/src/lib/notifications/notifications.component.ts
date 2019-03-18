@@ -33,7 +33,7 @@ export class NotificationsComponent implements OnInit {
   }
 
   click(button: NotificationButton) {
-    if (!!button.callBackFunctions) {
+    if (!!button.callBackFunctions && button.callBackFunctions.length > 0) {
       for (const custom of button.callBackFunctions) {
         if ( custom.param) {
           custom.func(custom.param);
