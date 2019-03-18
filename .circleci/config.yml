@@ -3,7 +3,7 @@ version: 2
 defaults: &defaults
   working_directory: ~/biplab-notifier
   docker:
-    - image: circleci/node:11.10.0
+    - image: circleci/node:11.10.0-browsers
 
 jobs:
   test:
@@ -18,7 +18,7 @@ jobs:
       - run: npm run package
       - run:
           name: Run tests
-          command: npm test
+          command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
 
       - save_cache:
           paths:
