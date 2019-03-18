@@ -1,0 +1,60 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/biplab-notifier
+  docker:
+    - image: circleci/node:11.10.0
+
+jobs:
+  test:
+    <<: *defaults  
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+
+      - run: npm install
+      - run:
+          name: Run tests
+          command: npm test
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - persist_to_workspace:
+          root: ~/biplab-notifier
+          paths: .
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/biplab-notifier
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/biplab-notifier/.npmrc
+      - run:
+          name: generate package
+          command: npm run package
+      - run:
+          name: Publish package
+          command: npm publish dist/biplab-notifier/biplab-notifier-*.tgz
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /^v.*/
+      - deploy:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              only: master
