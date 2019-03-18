@@ -38,7 +38,7 @@ biplab-notifier
 | closeButton: `show` or `hide`| Change closeButton visibility, default is `show` |
 | actionRow: `show` or `hide`| Change actionRow visibility, default is `show` |
 | body: `show` or `hide`| Change body visibility, default is `show`  |
-| isDailog: boolean | Change notifier to dialog, default is false  |
+| isDialog: boolean | Change notifier to dialog, default is false  |
 | isSnack: boolean | Change notifier to snackbar, default is false  |
 | disableOutsideClick: boolean| Prevent closing dialog if clicked outside  |
 | header: string| Add header text ( Only application of multi layout notifier ) |
