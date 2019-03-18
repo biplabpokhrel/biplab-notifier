@@ -131,32 +131,32 @@
       }
     },
     "notifier": {
-      "root": "projects/notifier",
-      "sourceRoot": "projects/notifier/src",
+      "root": "projects/biplab-notifier",
+      "sourceRoot": "projects/biplab-notifier/src",
       "projectType": "library",
       "prefix": "biplab",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/notifier/tsconfig.lib.json",
-            "project": "projects/notifier/ng-package.json"
+            "tsConfig": "projects/biplab-notifier/tsconfig.lib.json",
+            "project": "projects/biplab-notifier/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/notifier/src/test.ts",
-            "tsConfig": "projects/notifier/tsconfig.spec.json",
-            "karmaConfig": "projects/notifier/karma.conf.js"
+            "main": "projects/biplab-notifier/src/test.ts",
+            "tsConfig": "projects/biplab-notifier/tsconfig.spec.json",
+            "karmaConfig": "projects/biplab-notifier/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/notifier/tsconfig.lib.json",
-              "projects/notifier/tsconfig.spec.json"
+              "projects/biplab-notifier/tsconfig.lib.json",
+              "projects/biplab-notifier/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
