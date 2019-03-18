@@ -3,7 +3,7 @@ version: 2
 defaults: &defaults
   working_directory: ~/biplab-notifier
   docker:
-    - image: circleci/node:11.10.0-browsers
+    - image: circleci/node:11-browsers
 
 jobs:
   test:
