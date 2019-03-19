@@ -40,8 +40,8 @@
       <div class="notification-multi-parent-body">
       <!-- Modal Body -->
       <ng-template #bodyTemplate>
-        <ng-template [ngIf]="messages">
-          <div class="notification-multi-body">
+        <ng-template [ngIf]="!!messages && messages.length > 0">
+          <div [ngStyle]="{ 'padding-top': !!layoutHint.layout['head'] ? '0px' : '24px' }" class="notification-multi-body">
             <div class="notification-multi-message-row" *ngFor="let message of messages">{{ message }}</div>
           </div>
         </ng-template>
