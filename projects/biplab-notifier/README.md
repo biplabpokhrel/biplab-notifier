@@ -19,6 +19,7 @@ biplab-notifier
 | body?: TemplateRef<any> | Will overried the existing body |
 | button?: TemplateRef<any> | Will overried the existing default buttons |
 | footer?: TemplateRef<any> | Will add footer |
+| titleTemplate?: TemplateRef<any> | Will replace existing title template |
 
 `Notification` is a class, which contain all configuration need to execute biplab-notifier
 
