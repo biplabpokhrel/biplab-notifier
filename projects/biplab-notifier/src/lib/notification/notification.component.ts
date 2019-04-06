@@ -1,11 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild   } from '@angular/core';
 import { NotificationHint } from '../layout/notifier';
-import { Message } from '../message/notifer';
-import { isArray } from 'util';
+
 @Component({
   selector: 'biplab-notification',
   templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.css']
+  styleUrls: ['./notification.component.css'],
 })
 export class NotificationComponent implements OnInit {
   @ViewChild('parentDailog') myDiv: ElementRef;

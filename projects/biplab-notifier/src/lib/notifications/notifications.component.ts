@@ -1,10 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild    } from '@angular/core';
 import { NotificationHint } from '../layout/notifier';
 import { Message } from '../message/notifer';
-import { isArray } from 'util';
 import { MultiNotifier, NotificationButton } from '../layout/notifier';
-import { throwError } from 'rxjs';
-
 
 @Component({
   selector: 'biplab-notifications',

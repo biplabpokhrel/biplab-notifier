@@ -11,23 +11,22 @@
     ]"
     [ngStyle]="{'width': layoutHint.css?.width, 'height': layoutHint.css?.height}">
       <!-- Modal Title -->
-      <ng-template #mainTitle>
+    <ng-template [ngIf]="layoutHint.layout.title.status === 'show'">
+      <ng-template #mainTitle >
       <div class="notification-multi-title" [ngStyle]="{'background': layoutHint.css.background, 'color': layoutHint.css.color}">
         <ng-content select="[notificationIcon]"></ng-content>
         <ng-container *ngIf="layoutHint.template?.typeIcon then layoutHint.template?.typeIcon else empty"></ng-container>
         <ng-template [ngIf]="layoutHint.layout.closeButton.status === 'show'">
           <span (click)="notificationClose(false)" class="notification-multi-close">&times;</span>
         </ng-template>
-        <ng-template [ngIf]="layoutHint.layout.title.status === 'show'">
           <ng-content select="[notificationTitle]"></ng-content>
           <strong>{{ layoutHint.layout['titleText'] ? layoutHint.layout['titleText']  :  layoutHint.type | titlecase }} </strong>
-        </ng-template>
       </div>
       </ng-template>
       <ng-container *ngTemplateOutlet="layoutHint.template?.titleTemplate ? 
         layoutHint.template?.titleTemplate : mainTitle; context:{ 'data': messages, event: close, 'notificationClose': notificationClose.bind(this)}">
       </ng-container>
-
+    </ng-template>
       <!-- Modal header -->
       <ng-template #headTeample>
         <ng-template [ngIf]="layoutHint.layout['head']">
