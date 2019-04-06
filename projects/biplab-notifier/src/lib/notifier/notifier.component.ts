@@ -8,7 +8,7 @@ import { NotifierTemplate } from '../template/notifier';
 @Component({
   selector: 'biplab-notifier',
   templateUrl: './notifier.component.html',
-  styleUrls: ['./notifier.component.css']
+  styleUrls: ['./notifier.component.css'],
 })
 export class NotifierComponent implements OnInit {
   @Input() notifierTemplates?: NotifierTemplate;
