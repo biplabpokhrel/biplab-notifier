@@ -72,6 +72,7 @@ export class ShowOnClickComponent implements OnInit {
   clickToShowSuccessMulti() {
     this.notificationMulti.messages = ['Success1', 'Success2', 'Success3'];
     this.notificationMulti.type = 'success';
+    this.notificationMulti.actionRow = 'show';
     this.notificationMulti.show();
   }
 
