@@ -1,6 +1,7 @@
 <ng-template #empty></ng-template>
 <ng-template [ngIf]="layoutHint">
 <div #parentDailog (click)="closeDailog($event)" [ngClass]="[ layoutHint.layout.displayAs ]">
+  <div [ngClass]="[ 'notification-viewport-'+layoutHint.layout.displayAs ]">
     <!-- Modal content -->
     <div
     [ngClass]="[
@@ -9,7 +10,11 @@
       layoutHint.layout.displayAs+'-'+layoutHint.css.position+'-animation',
       shadow
     ]"
-    [ngStyle]="{'width': layoutHint.css?.width, 'height': layoutHint.css?.height}">
+    [ngStyle]="{
+      'max-width': '85vw',
+      'max-height': '99vh',
+      'width': layoutHint.css?.width,
+      'height': layoutHint.css?.height}">
       <!-- Modal Title -->
     <ng-template [ngIf]="layoutHint.layout.title.status === 'show'">
       <ng-template #mainTitle >
@@ -27,32 +32,35 @@
         layoutHint.template?.titleTemplate : mainTitle; context:{ 'data': messages, event: close, 'notificationClose': notificationClose.bind(this)}">
       </ng-container>
     </ng-template>
+      <div [ngStyle]="{ 'padding': !!layoutHint.layout['head'] ? '0px 16px' : '16px' }"  [ngClass]="[ 'notification-multi-body-'+ layoutHint.layout.displayAs ]">
       <!-- Modal header -->
       <ng-template #headTeample>
         <ng-template [ngIf]="layoutHint.layout['head']">
-            <div class="notification-multi-header">
-                <h1> {{layoutHint.layout['head']}}</h1>
-            </div>
+            <h1> {{layoutHint.layout['head']}}</h1>
         </ng-template>
       </ng-template>
       <ng-container *ngTemplateOutlet="layoutHint.template?.head ? layoutHint.template?.head : headTeample"></ng-container>
-      <div class="notification-multi-parent-body">
+
       <!-- Modal Body -->
       <ng-template #bodyTemplate>
         <ng-template [ngIf]="!!messages && messages.length > 0">
-          <div [ngStyle]="{ 'padding-top': !!layoutHint.layout['head'] ? '0px' : '24px' }" class="notification-multi-body">
-            <div class="notification-multi-message-row" *ngFor="let message of messages">{{ message }}</div>
-          </div>
+          <div class="notification-multi-message-row" *ngFor="let message of messages">{{ message }}</div>
         </ng-template>
       </ng-template>
       <ng-content select="[notificationMessages]"></ng-content>
       <ng-container *ngTemplateOutlet="layoutHint.template?.body ? layoutHint.template?.body : bodyTemplate; context:{ data: messages, 'notificationClose': notificationClose.bind(this) }"></ng-container>
-
+          <!-- footer -->
+      <div class="notification-multi-body-footer">
+          <ng-container *ngIf="layoutHint.template?.footer then layoutHint.template?.footer else empty"></ng-container>
+          <ng-content select="[notificationFooter]"></ng-content>
+      </div>
+      </div>
       <!-- Modal action -->
       <ng-template [ngIf]="layoutHint.layout['actionRow']['status'] === 'show'">
-        <div class="notification-multi-action">
+        <div id="action" [ngClass]="[ 'notification-multi-action-'+layoutHint.layout.displayAs ]" >
           <ng-template #bottonTemplate>
             <button
+              class="button"
               *ngFor="let button of layoutHint.buttons"
               [disabled]="button?.disabled"
               [type]="button?.type"
@@ -75,10 +83,7 @@
           <ng-container *ngTemplateOutlet="layoutHint.template?.button ? layoutHint.template?.button : bottonTemplate; context:{ 'data': messages, 'event': close, 'notificationClose': notificationClose.bind(this) }"></ng-container>
         </div>
       </ng-template>
-      <!-- footer -->
-      <ng-container *ngIf="layoutHint.template?.footer then layoutHint.template?.footer else empty"></ng-container>
-      <ng-content select="[notificationFooter]"></ng-content>
-      </div>
     </div>
+  </div>
 </div>
 </ng-template>

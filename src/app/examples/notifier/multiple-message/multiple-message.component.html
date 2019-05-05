@@ -1,7 +1,16 @@
-
+<ng-template #footer>
+        <div>
+           <p>This is custom footer note 1</p>
+           <p>This is custom footer note 2</p>
+           <p>This is custom footer note 3</p>
+           <p>This is custom footer note 4</p>
+           <p>This is custom footer note 5</p>
+           <p>This is custom footer note 6</p>
+        </div>
+</ng-template>
 <div>
     This is multiple message
-    <biplab-notifier [(notification)]="notification">
+    <biplab-notifier [(notification)]="notification" [notifierTemplates]="{'footer': footer}">
     </biplab-notifier>
     <button (click)="show()">Open Dailog</button>
 </div>

@@ -14,7 +14,7 @@ export class SnackbarComponent implements OnInit {
     this.snackbarMulti = new Notification( 'multi', 'snack-bar');
     this.snackbar = new Notification('single', 'snack-bar');
     this.snackbar.timer = { duration: 4000 };
-  //  this.snackbarMulti.timer = { duration: 4000 };
+    this.snackbarMulti.timer = { duration: 4000 };
   }
 
   ngOnInit() {
