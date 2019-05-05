@@ -12,11 +12,45 @@ export class MultipleMessageComponent implements OnInit {
     this.notification.type = 'note';
     this.notification.layoutType = 'multi';
     this.notification.body = 'hide';
-    this.notification.messages = ['hi'];
+    this.notification.messages = [
+      'hi',
+      'hell',
+      'How are you',
+      'I know',
+      'this is very',
+      'long message',
+      'but',
+      'I have to test this one',
+      'to see how is this going to look like',
+      'when there are so many stuff to show the people',
+      '------------------------------------------------',
+      'hi',
+      'hell',
+      'How are you',
+      'I know',
+      'this is very',
+      'long message',
+      'but',
+      'I have to test this one',
+      'to see how is this going to look like',
+      'when there are so many stuff to show the people',
+      '\n',
+      'hi',
+      'hell',
+      'How are you',
+      'I know',
+      'this is very',
+      'long message',
+      'but',
+      'I have to test this one',
+      'to see how is this going to look like',
+      'when there are so many stuff to show the people when there are so many stuff to show the people ',
+      ''
+    ];
     this.notification.trueButton = 'Yes';
     this.notification.falseButton = 'No';
-    this.notification.css.width = '300px';
-    this.notification.css.height = 'auto';
+    this.notification.css.width = '350px';
+    this.notification.css.height = '400px';
     this.notification.titleText = 'Delete';
     this.notification.header = 'Are you sure ??';
     this.notification.isDialog = true;
