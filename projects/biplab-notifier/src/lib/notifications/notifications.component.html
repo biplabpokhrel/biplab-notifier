@@ -11,8 +11,8 @@
       shadow
     ]"
     [ngStyle]="{
-      'max-width': layoutHint.layout.displayAs === 'notification' ? '100vw' : '85vw',
-      'max-height': layoutHint.layout.displayAs === 'notification' ? '100vh' : '99vh',
+      'max-width': layoutHint.layout.displayAs === 'notification' ? ( layoutHint.css?.width ? '97vw' : '100vw' ) : '80vw',
+      'max-height': '100vh',
       'width': layoutHint.css?.width,
       'height': layoutHint.css?.height}">
       <!-- Modal Title -->
