@@ -3,16 +3,15 @@ body {
   margin: 0;
 }
 
+h1 {
+  margin: 10px 0px;
+}
+
 .notification {
     opacity: 1;
     transition: opacity 0.6s;
 }
 
-.notification-content  {
-    padding: 0px;
-    background: rgb(245, 243, 243);
-    color: black;
-}
 
 .notification-shadow {
     -webkit-box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
@@ -60,10 +59,7 @@ body {
 }
 
 .dialog-content {
-    max-width: 80vw;
-    max-height: 85vw;
     margin: auto;
-    border: 1px solid #888;
     display: block;
     position: fixed;
     z-index: 999;
@@ -72,8 +68,10 @@ body {
     -webkit-animation-duration: 0.4s;
     animation-name: fadeIn;
     animation-duration: 0.4s;
-    background: rgb(245, 243, 243);
     color: black;
+    border-radius: 5px;
+    max-height: inherit;
+    background-color: #f5f3f3;
   }
 
 .default {
@@ -225,41 +223,31 @@ body {
   /* The Close Button */
   .notification-multi-close {
     float: right;
-    font-size: 15px;
-    font-weight: bold;
+    font-size: 26px;
   }
   
   .notification-multi-close:hover,
   .notification-multi-close:focus {
     text-decoration: none;
     cursor: pointer;
-    color: red;
+    color: rgb(87, 3, 3);
   }
   
   .notification-multi-title {
     padding: 15px;
     border: 1px snow black;
+    font-size: 22px;
   }
   
   .notification-multi-header {
     padding: 0px 15px;
-  }
-
-  .notification-multi-parent-body {
-    padding: 1px;
-  }
-
-  .notification-multi-body {
-      margin: 0px 15px; 
-      padding-bottom: 24px;
-      font-size: 18px;
   }
   
   .notification-multi-footer {
     padding: 12px 16px;
   }
 
-button {
+.button {
   font-family: Roboto,"Helvetica Neue",sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -276,7 +264,6 @@ button {
   outline: 0;
   border: none;
   -webkit-tap-highlight-color: transparent;
-  display: inline-block;
   white-space: nowrap;
   text-decoration: none;
   vertical-align: baseline;
@@ -286,11 +273,14 @@ button {
   line-height: 36px;
   padding: 0 16px;
   border-radius: 4px;
-  overflow: visible;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  overflow: hidden;
 }
 
-button:hover {
-  text-decoration: underline;
+.button:hover {
+  transition: all 0.8s;
+  opacity: 0.8;
 }
 
 .button-shadow{
@@ -310,10 +300,37 @@ button:hover {
     background: #f4433638;
   }
 
-  .notification-multi-action {
-    padding: 0px 0px 10px 10px;
+  .notification-multi-action-notification {
+    padding: 10px;
   }
 
+  .notification-multi-action-dialog {
+    padding: 10px;
+    background: rgb(245, 243, 243);
+  }
+
+  .notification-multi-action-snack-bar {
+    padding: 10px;
+    background: rgb(245, 243, 243);
+  }
+
+
   .notification-multi-action button {
+    margin-right: 10px;
+  }
+
+  .notification-multi-body-dialog{
+    display: block;
+    max-height: 65vh;
+    overflow: auto;
+    background: rgb(245, 243, 243);
+  }
+
+  .notification-multi-body-footer {
+    overflow: auto;
+    max-height: 70px;
+  }
+
+  #action button {
     margin-right: 10px;
   }
