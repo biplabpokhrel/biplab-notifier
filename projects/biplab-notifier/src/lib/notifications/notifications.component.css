@@ -324,11 +324,21 @@ h1 {
     max-height: 65vh;
     overflow: auto;
     background: rgb(245, 243, 243);
+    word-wrap: break-word;
+  }
+
+  .notification-multi-body-snack-bar{
+    display: block;
+    max-height: 65vh;
+    overflow: auto;
+    background: rgb(245, 243, 243);
+    word-wrap: break-word;
   }
 
   .notification-multi-body-footer {
     overflow: auto;
     max-height: 70px;
+    word-wrap: break-word;
   }
 
   #action button {
