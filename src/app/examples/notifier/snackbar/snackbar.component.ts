@@ -91,6 +91,8 @@ export class SnackbarComponent implements OnInit {
   showRightMulti() {
     this.snackbarMulti.css.position = 'right';
     this.snackbarMulti.type = 'help';
+    this.snackbarMulti.css.height = '2500px';
+    this.snackbarMulti.css.width = '2500px';
      this.snackbarMulti.messages = [
        'This is help right 1',
        'This is help right 2',

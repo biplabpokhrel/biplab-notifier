@@ -44,6 +44,8 @@ export class ShowOnClickComponent implements OnInit {
   clickToShowHelpMulti() {
     this.notificationMulti.layoutType = 'multi';
     this.notificationMulti.type = 'help';
+    this.notificationMulti.css.width = '20000px';
+    this.notificationMulti.css.height = '20000px';
     this.notificationMulti.messages = ['help1', 'help2', 'help3', 'help4', 'help5', 'help6'];
 
     this.notificationMulti.show();

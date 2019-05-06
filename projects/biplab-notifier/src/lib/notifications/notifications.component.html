@@ -11,8 +11,8 @@
       shadow
     ]"
     [ngStyle]="{
-      'max-width': '85vw',
-      'max-height': '99vh',
+      'max-width': layoutHint.layout.displayAs === 'notification' ? '100vw' : '85vw',
+      'max-height': layoutHint.layout.displayAs === 'notification' ? '100vh' : '99vh',
       'width': layoutHint.css?.width,
       'height': layoutHint.css?.height}">
       <!-- Modal Title -->
@@ -32,7 +32,8 @@
         layoutHint.template?.titleTemplate : mainTitle; context:{ 'data': messages, event: close, 'notificationClose': notificationClose.bind(this)}">
       </ng-container>
     </ng-template>
-      <div [ngStyle]="{ 'padding': !!layoutHint.layout['head'] ? '0px 16px' : '16px' }"  [ngClass]="[ 'notification-multi-body-'+ layoutHint.layout.displayAs ]">
+      <div [ngStyle]="{'padding': !!layoutHint.layout['head'] ? '0px 16px' : '16px'}" 
+        [ngClass]="[ 'notification-multi-body-'+ layoutHint.layout.displayAs ]">
       <!-- Modal header -->
       <ng-template #headTeample>
         <ng-template [ngIf]="layoutHint.layout['head']">

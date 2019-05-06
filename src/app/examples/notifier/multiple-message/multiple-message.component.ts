@@ -49,8 +49,8 @@ export class MultipleMessageComponent implements OnInit {
     ];
     this.notification.trueButton = 'Yes';
     this.notification.falseButton = 'No';
-    this.notification.css.width = 'auto';
-    this.notification.css.height = 'auto';
+    this.notification.css.width = '100000px';
+    this.notification.css.height = '100000px';
     this.notification.titleText = 'Delete';
     this.notification.header = 'Are you sure ??';
     this.notification.isDialog = true;
