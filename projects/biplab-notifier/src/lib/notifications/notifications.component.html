@@ -1,7 +1,7 @@
 <ng-template #empty></ng-template>
 <ng-template [ngIf]="layoutHint">
 <div #parentDailog (click)="closeDailog($event)" [ngClass]="[ layoutHint.layout.displayAs ]">
-  <div [ngClass]="[ 'notification-viewport-'+layoutHint.layout.displayAs ]">
+  <div>
     <!-- Modal content -->
     <div
     [ngClass]="[
